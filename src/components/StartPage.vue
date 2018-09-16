@@ -3,7 +3,7 @@
     <v-card>
         <v-card-actions>
             <v-btn depressed block dark color="primary" @click="$router.push('/main')">
-                Открыть Онлайн-калькулятор
+                Открыть Онлайн-калькулятор (DEMO)
             </v-btn>
         </v-card-actions>
     </v-card>
