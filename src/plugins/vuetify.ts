@@ -9,7 +9,7 @@ const vuetifyConfig: VuetifyUseOptions = {
         current: 'ru'
     },
     theme: {
-        primary: '#ee44aa',
+        primary: '#00B0FF',
         secondary: '#424242',
         accent: '#82B1FF',
         error: '#FF5252',

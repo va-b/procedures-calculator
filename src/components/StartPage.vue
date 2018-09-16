@@ -1,12 +1,50 @@
 <template>
-<v-container fill-height justify-center align-center>
-    <v-card>
-        <v-card-actions>
-            <v-btn depressed block dark color="primary" @click="$router.push('/main')">
-                Открыть Онлайн-калькулятор (Demo-версия)
-            </v-btn>
-        </v-card-actions>
-    </v-card>
+<v-container grid-list-lg fill-height justify-center align-center>
+    <v-layout row fill-height justify-center align-center>
+        <v-flex xs12 xl8 class="elevation-8 pa-4 h-100"
+                style="background: url(http://archit.tmbreg.ru/assets/files/news/calculator/mainimg2.png) center center no-repeat; background-size: cover;"
+        >
+            <v-layout row justify-end>
+                <v-flex xs12 md8 lg6>
+                    <v-card tile class="mb-2 elevation-12">
+                        <div class="d-flex py-3 px-4 d-flex">
+                            <img src="http://archit.tmbreg.ru/assets/files/news/calculator/gerb-small.png" style="height: 68px; min-width: 64px; max-width: 64px;" class="d-block pr-3">
+                            <div class="headline py-2">
+                                Калькулятор процедур в сфере строительства
+                            </div>
+                        </div>
+                    </v-card>
+                    <v-layout row wrap>
+                        <v-flex xs12 sm4 v-for="(i, index) in etap" :key="index">
+                            <v-card tile class="elevation-12 h-100">
+                                <v-card-title class="justify-center align-center py-2 h-50">
+                                    <v-avatar color="primary">
+                                        <!--<span class="headline white--text">{{index + 1}}</span>-->
+                                        <v-icon class="white--text">{{i.icon}}</v-icon>
+                                    </v-avatar>
+                                </v-card-title>
+                                <v-divider/>
+                                <v-card-title class="subheading justify-center align-center py-2 h-50">
+                                    <div class="text-xs-center">{{i.text}}</div>
+                                </v-card-title>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+
+                    <v-card tile class="mt-2 elevation-12">
+                        <v-card-text class="subheading">
+                            Интерактивный сервис для застройщиков, где можно узнать сроки и этапы прохождения строительных процедур для конкретного проекта.
+                        </v-card-text>
+                        <v-card-actions class="justify-center pb-3">
+                            <v-btn large dark color ="primary" @click="$router.push('/main')">
+                                Открыть Онлайн-калькулятор (Demo-версия)
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-flex>
+    </v-layout>
 </v-container>
 </template>
 
@@ -17,21 +55,18 @@
     export default class StartPage extends Vue {
         e1: number = 1;
 
-        steps: Step[] = [
+        etap: {text: string; icon: string;}[] = [
             {
-                numer: 1,
-                text: 'text1',
-                title: 'step1'
+                icon: 'fa-file-invoice',
+                text: 'прохождение процедур',
             },
             {
-                numer: 2,
-                text: 'text2',
-                title: 'step2'
+                icon: 'fa-clock',
+                text: 'расчёт времени',
             },
             {
-                numer: 3,
-                text: 'text3',
-                title: 'step3'
+                icon: 'fa-hotel',
+                text: 'реализация строительного проекта',
             }
         ];
 
