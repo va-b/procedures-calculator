@@ -20,11 +20,11 @@
 </template>
 <script lang="ts">
     import {Component, Prop, Vue, Watch} from "vue-property-decorator";
-    import {Choice, Parameter} from "../model/model";
+    import {IChoice, IParameter} from "../model/model";
 
     @Component
     export default class CalcParameter extends Vue {
-        @Prop() parameter: Parameter;
+        @Prop() parameter: IParameter;
 
         radioGroup: any = null;
 

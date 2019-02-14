@@ -43,9 +43,7 @@
 <script lang="ts">
     import {Component, Vue, Watch} from "vue-property-decorator";
     import CalcParameter from "./CalcParameter.vue";
-    import {Parameter, Step} from "../model/model";
-    import {parameters} from "../data/parametersData";
-    import {stepsData} from "../data/stepsData";
+    import {IParameter, IStage} from "@/model/model";
 
     @Component({
         components: {CalcParameter}
@@ -53,9 +51,9 @@
     export default class Main extends Vue {
         e1: number = 1;
 
-        get params(): Parameter[] { return parameters; }
+        get params(): IParameter[] { return []; }
 
-        get steps(): Step[] { return stepsData; }
+        get steps(): IStage[] { return []; }
 
 
 

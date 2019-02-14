@@ -49,32 +49,27 @@
 </template>
 
 <script lang="ts">
-    import {Component, Vue, Watch} from "vue-property-decorator";
+    import {Component, Vue} from "vue-property-decorator";
 
     @Component
     export default class StartPage extends Vue {
-        e1: number = 1;
 
-        etap: {text: string; icon: string;}[] = [
-            {
-                icon: 'fa-file-invoice',
-                text: 'прохождение процедур',
-            },
-            {
-                icon: 'fa-clock',
-                text: 'расчёт времени',
-            },
-            {
-                icon: 'fa-hotel',
-                text: 'реализация строительного проекта',
-            }
-        ];
+        private get etap(): {text: string; icon: string;}[] {
+            return [
+                {
+                    icon: 'fa-file-invoice',
+                    text: 'прохождение процедур',
+                },
+                {
+                    icon: 'fa-clock',
+                    text: 'расчёт времени',
+                },
+                {
+                    icon: 'fa-hotel',
+                    text: 'реализация строительного проекта',
+                }
+            ];
+        }
 
-    }
-
-    interface Step {
-        title: string;
-        numer: number;
-        text: string;
     }
 </script>
