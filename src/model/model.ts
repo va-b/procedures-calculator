@@ -3,7 +3,11 @@ import {
     DocumentDbModel,
     ExpressionDbModel,
     FrontendStepDbModel,
-    OrganisationDbModel, ParameterDbModel, ProcedureDbModel, StageDbModel, SubregionDbModel
+    OrganisationDbModel,
+    ParameterDbModel,
+    ProcedureDbModel,
+    StageDbModel,
+    SubregionDbModel
 } from "@/dataScheme/DataModel";
 
 export type IChoice = ChoiceDbModel;
