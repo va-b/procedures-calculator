@@ -1,5 +1,5 @@
 import ICalculatorService from "@/services/ICalculatorService";
-import {FrontendStepDbModel} from "@/dataScheme/DataModel";
+import {FrontendStepDbModel, ParameterDbModel} from "@/dataScheme/DataModel";
 import {FakeDb} from "@/dataScheme/FakeDb";
 import {IParameter} from "@/model/model";
 
@@ -15,9 +15,16 @@ export default class FakeDbCalculatorService implements ICalculatorService
 
     GetParameter(stepId: number): Promise<IParameter[]>
     {
+        let mapParams: (p: ParameterDbModel) => IParameter
+            = param =>
+        {
+            (<IParameter>param).choices = FakeDb.Choice.filter(y => y.parameterId == param.id)
+            return param as IParameter;
+        };
         return new Promise(resolve => resolve(
             FakeDb.Parameter
-                .filter(x => x.frontendStepId == stepId)
+                .filter(x => x.frontendStepId == stepId )
+                .map(mapParams)
         ));
     }
 

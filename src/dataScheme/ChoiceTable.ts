@@ -35,4 +35,12 @@ export default (<ChoiceDbModel[]>[
     { id: 32, parameterId: 14, relatedExpressionId: 0,  title: 'Внебюджетные средства'},
     { id: 33, parameterId: 15, relatedExpressionId: 0,  title: 'Требуется'},
     { id: 34, parameterId: 15, relatedExpressionId: 0,  title: 'Не требуется'},
+    { id: 35, parameterId: 16, relatedExpressionId: 0,  title: 'Да'},
+    { id: 36, parameterId: 17, relatedExpressionId: 0,  title: 'Нет'},
+    { id: 37, parameterId: 18, relatedExpressionId: 0,  title: 'Да'},
+    { id: 38, parameterId: 19, relatedExpressionId: 0,  title: 'Нет'},
+    { id: 39, parameterId: 20, relatedExpressionId: 0,  title: 'Да'},
+    { id: 40, parameterId: 21, relatedExpressionId: 0,  title: 'Нет'},
+    { id: 41, parameterId: 22, relatedExpressionId: 0,  title: 'Государственная экспертиза'},
+    { id: 42, parameterId: 23, relatedExpressionId: 0,  title: 'Негосударственная экспертиза'}
 ]);

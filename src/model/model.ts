@@ -15,7 +15,11 @@ export type IDocument = DocumentDbModel;
 export type IExpression = ExpressionDbModel;
 export type IFrontendStep = FrontendStepDbModel;
 export type IOrganisation = OrganisationDbModel;
-export type IParameter = ParameterDbModel;
+//export type IParameter = ParameterDbModel;
 export type IProcedure = ProcedureDbModel;
 export type IStage = StageDbModel;
 export type ISubregion = SubregionDbModel;
+
+export interface IParameter extends ParameterDbModel{
+    choices: IChoice[];
+}

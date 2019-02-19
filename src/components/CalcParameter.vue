@@ -1,9 +1,9 @@
 <template>
     <v-flex>
         <v-card>
-            <v-card-title>
+            <v-card-title  style="flex-wrap: nowrap;">
               <v-avatar :size="40" class="mr-3">
-                  <img :src="parameter.imgUrl"/>
+                  <img :src="parameter.imageUrl"/>
                                </v-avatar>
                 <div>{{parameter.title}}</div>
             </v-card-title>
