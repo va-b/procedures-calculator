@@ -20,7 +20,7 @@ export default (<ParameterDbModel[]>[
     {id: 17, frontendStepId: 4, description: '', imageUrl: 'https://smekalkin.ru/2381-small_d/kukolnyi-dom.jpg', title: 'Подключение (технологического присоединения) к централизованным ливневой системам водоотведения' },
     {id: 18, frontendStepId: 4, description: '', imageUrl: 'https://smekalkin.ru/2381-small_d/kukolnyi-dom.jpg', title: 'Подключение (технологическое присоединение) к системам теплоснабжения' },
     {id: 19, frontendStepId: 4, description: '', imageUrl: 'https://smekalkin.ru/2381-small_d/kukolnyi-dom.jpg', title: 'Подключение (присоединение) к централизованным системам горячего водоснабжения' },
-    {id: 20, frontendStepId: 5, description: '', imageUrl: 'https://smekalkin.ru/2381-small_d/kukolnyi-dom.jpg', title: 'Предполагается ли экспретиза результатов инженерных изысканий и проектной документации' },
+    {id: 20, frontendStepId: 5, description: '', imageUrl: 'https://smekalkin.ru/2381-small_d/kukolnyi-dom.jpg', title: 'Предполагается ли экспретиза проектной документации и результатов инженерных изысканий' },
     {id: 21, frontendStepId: 5, description: '', imageUrl: 'https://smekalkin.ru/2381-small_d/kukolnyi-dom.jpg', title: 'Осуществление землянных работ' },
     {id: 22, frontendStepId: 5, description: '', imageUrl: 'https://smekalkin.ru/2381-small_d/kukolnyi-dom.jpg', title: 'Присвоение адреса объекту адресации' },
     {id: 23, frontendStepId: 5, description: '', imageUrl: 'https://smekalkin.ru/2381-small_d/kukolnyi-dom.jpg', title: 'Вырубка или пересадка деревьев' }

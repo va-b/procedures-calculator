@@ -9,9 +9,7 @@
                     <v-card tile class="mb-2 elevation-12">
                         <div class="d-flex py-3 px-4 d-flex">
                             <img src="http://archit.tmbreg.ru/assets/files/news/calculator/gerb-small.png" style="height: 68px; min-width: 64px; max-width: 64px;" class="d-block pr-3">
-                            <div class="headline py-2">
-                                Калькулятор процедур в сфере строительства
-                            </div>
+                            <div class="headline py-2">Калькулятор процедур в сфере строительства</div>
                         </div>
                     </v-card>
                     <v-layout row wrap>
