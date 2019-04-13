@@ -34,7 +34,9 @@
                             Интерактивный сервис для застройщиков, где можно узнать сроки и этапы прохождения строительных процедур для конкретного проекта.
                         </v-card-text>
                         <v-card-actions class="justify-center pb-3">
-                            <v-btn large dark color ="primary" @click="$router.push('/main')">
+                            <v-btn large dark color ="primary"
+                                   @click="$router.push('/main')"
+                            >
                                 Открыть Онлайн-калькулятор (Demo-версия)
                             </v-btn>
                         </v-card-actions>
@@ -47,11 +49,11 @@
 </template>
 
 <script lang="ts">
-    import {Component, Vue} from "vue-property-decorator";
+    import { Component, Vue } from "vue-property-decorator";
 
     @Component
-    export default class StartPage extends Vue {
-
+    export default class StartPage extends Vue
+    {
         private get etap(): {text: string; icon: string;}[] {
             return [
                 {

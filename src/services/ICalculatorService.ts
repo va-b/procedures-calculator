@@ -1,9 +1,22 @@
+import { ChoiceDbModel, ChoiceLinkDbModel, ExpressionDbModel, FrontendStepDbModel, ParameterDbModel } from "@/model/DataModel";
 import IService from "@/services/IService";
-import {IFrontendStep, IParameter} from "@/model/model";
 
 export default interface ICalculatorService extends IService
 {
-    GetSteps: () => Promise<IFrontendStep[]>;
+    GetSteps: () => Promise<IInitial[]>;
+    GetResults: (expressionIds: number[]) => Promise<ICalcResult>
+}
 
-    GetParameter: (stepId: number) => Promise<IParameter[]>;
+export interface IInitial
+{
+    frontendSteps: FrontendStepDbModel[];
+    parameters: ParameterDbModel[];
+    choices: ChoiceDbModel[];
+    expressions: ExpressionDbModel[];
+    links: ChoiceLinkDbModel[];
+}
+
+export interface ICalcResult
+{
+
 }

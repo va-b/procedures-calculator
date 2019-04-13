@@ -8,10 +8,15 @@ interface IContentEntity extends IEntity
     title: string;
 }
 
+export interface ChoiceLinkDbModel extends IEntity
+{
+    chS: number;
+    chE: number;
+}
+
 export interface ChoiceDbModel extends IContentEntity
 {
     parameterId: number;
-    relatedExpressionId: number;
 }
 
 export interface DocumentDbModel extends IContentEntity 
@@ -47,7 +52,7 @@ export interface ParameterDbModel extends IContentEntity
     frontendStepId: number;
 }
 
-export interface ProcedureDbModel extends IEntity
+export interface ProcedureDbModel extends IContentEntity
 {
     performingTime: number;
     isTimeByCalendar: boolean;

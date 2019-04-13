@@ -1,20 +1,24 @@
+import CalculatorService from "@/services/CalculatorService";
 import ICalculatorService from "@/services/ICalculatorService";
 import IServiceFactory from "@/services/IServiceFactory";
-import FakeDbCalculatorService from "@/dataScheme/FakeDbCalculatorService";
-import IService from "@/services/IService";
+import IService, { ApiHelper } from "@/services/IService";
 
 export default class ServiceFactory implements IServiceFactory
 {
-    private servicesStorage: IService[] = [];
+    private readonly servicesStorage: IService[] = [];
+    private readonly getUrl: ApiHelper = url => 'http://192.168.0.65:5000/api/' + url;
 
-    private serviceRegister<TService extends IService>(S: {new(): TService}, key: string): TService
+    private getService<TService extends IService>(SC: () => TService, key: string): TService
     {
-        if(!this.servicesStorage[key]) this.servicesStorage[key] = new S;
+        if(!this.servicesStorage[key]) this.servicesStorage[key] = SC();
         return this.servicesStorage[key];
     }
 
     GetDefaultCalculatorService(): ICalculatorService
     {
-        return this.serviceRegister<ICalculatorService>(FakeDbCalculatorService, "DefaultCalculatorService");
+        return this.getService<ICalculatorService>(
+            () => <ICalculatorService>new CalculatorService(this.getUrl),
+            'CalculatorService'
+        );
     }
 }

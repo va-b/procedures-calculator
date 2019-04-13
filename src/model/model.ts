@@ -8,18 +8,31 @@ import {
     ProcedureDbModel,
     StageDbModel,
     SubregionDbModel
-} from "@/dataScheme/DataModel";
+} from "@/model/DataModel";
+import { AppState } from "@/store";
 
-export type IChoice = ChoiceDbModel;
-export type IDocument = DocumentDbModel;
-export type IExpression = ExpressionDbModel;
-export type IFrontendStep = FrontendStepDbModel;
-export type IOrganisation = OrganisationDbModel;
-//export type IParameter = ParameterDbModel;
-export type IProcedure = ProcedureDbModel;
-export type IStage = StageDbModel;
-export type ISubregion = SubregionDbModel;
+export class Choice implements ChoiceDbModel
+{
+    selected: boolean = false;
 
-export interface IParameter extends ParameterDbModel{
-    choices: IChoice[];
+    get disabled(): boolean
+    {
+        return false;
+    }
+
+    private state: AppState;
+
+    id: number;
+    parameterId: number;
+    title: string;
+
+    constructor(x: ChoiceDbModel, state: AppState)
+    {
+        this.id = x.id;
+        this.parameterId = x.parameterId;
+        this.title = x.title;
+        this.state = state;
+    }
 }
+
+export type IFrontendStep = FrontendStepDbModel;
