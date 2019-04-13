@@ -44,6 +44,15 @@
                     >
                         Вперёд
                     </v-btn>
+
+                    <template v-if="$store.getters.IsLastStep">
+                        <v-spacer></v-spacer>
+                        <v-btn depressed color="primary"
+                               @click="() => $store.dispatch('LoadResults')"
+                        >
+                            Получить результат
+                        </v-btn>
+                    </template>
                 </v-stepper-content>
             </v-stepper-items>
         </v-stepper>

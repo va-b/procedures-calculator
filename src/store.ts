@@ -1,3 +1,4 @@
+import { GetExpressionsByChoiceIds } from "@/model/ChoiceGraphHelper";
 import { ChoiceLinkDbModel, ExpressionDbModel, FrontendStepDbModel, ParameterDbModel } from "@/model/DataModel";
 import { Choice } from "@/model/model";
 import { IInitial } from "@/services/ICalculatorService";
@@ -58,8 +59,26 @@ const store: StoreOptions<AppState> = {
       }
       catch(e) {console.error(e)}
     },
-    async LoadResults({commit}): Promise<void>
+    async LoadResults({commit, state}): Promise<void>
     {
+      let expressionIds = GetExpressionsByChoiceIds(
+          state.choices.filter(x => x.selected).map(x => x.id),
+          state.expressions,
+          state.links,
+          state.choices
+      ).map(x => x.id);
+      let distinctedExpressionIds = Array.from(new Set(expressionIds));
+      console.log(distinctedExpressionIds);
+
+      try
+      {
+        let res = await window
+            .serviceFactory
+            .GetDefaultCalculatorService()
+            .GetResults(distinctedExpressionIds);
+        console.log(res);
+      }
+      catch (e){console.error(e)}
 
     }
   },
