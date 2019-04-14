@@ -1,7 +1,15 @@
 <template>
     <v-container grid-list-lg>
+        <v-progress-circular
+                v-if="!$store.state.frontendSteps.length"
+                :size="60"
+                :width="3"
+                color="primary"
+                indeterminate
+                style="position:absolute; top: calc(50% - 30px); left: calc(50% - 30px)"
+        ></v-progress-circular>
         <v-stepper class="c-stepper" alt-labels
-                   v-if="$store.state.frontendSteps.length"
+                   v-else
                    :value="$store.state.currentStepNumber">
             <v-stepper-header>
                 <template v-for="step in $store.state.frontendSteps" >
@@ -47,8 +55,7 @@
 
                     <template v-if="$store.getters.IsLastStep">
                         <v-btn depressed color="primary"
-                               :disabled="isLoadingResult"
-                               @click="goToResult"
+                               @click="$router.push('/result')"
                         >
                             Получить результат
                         </v-btn>
@@ -68,19 +75,9 @@
     })
     export default class Main extends Vue
     {
-        isLoadingResult: boolean = false;
-
         created()
         {
             this.$store.dispatch("LoadInitial");
-        }
-
-        async goToResult()
-        {
-            this.isLoadingResult = true;
-            await this.$store.dispatch('LoadResults');
-            this.isLoadingResult = false;
-            this.$router.push('/result');
         }
     }
 </script>

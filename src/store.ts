@@ -1,5 +1,5 @@
 import { GetExpressionsByChoiceIds } from "@/model/ChoiceGraphHelper";
-import { IChoiceLink, IExpression, IFrontendStep, IInitial, IParameter } from "@/model/model";
+import { IChoiceLink, IExpression, IFrontendStep, IInitial, IParameter, IResultStep } from "@/model/model";
 import { Choice } from "@/model/model";
 import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex';
@@ -10,8 +10,9 @@ export class AppState
   frontendSteps: IFrontendStep[] = [];
   parameters: IParameter[] = [];
   choices: Choice[] = [];
-  expressions: IExpression[] =[];
-  links: IChoiceLink[] =[];
+  expressions: IExpression[] = [];
+  links: IChoiceLink[] = [];
+  results: IResultStep[] = [];
 }
 
 const store: StoreOptions<AppState> = {
@@ -19,7 +20,7 @@ const store: StoreOptions<AppState> = {
   mutations: {
     SetInitial(state: AppState, initData: IInitial)
     {
-      state.frontendSteps = initData.frontendSteps.sort((a, b) => a.order - b.order);
+      state.frontendSteps = initData.frontendSteps;
       state.currentStepNumber = initData.frontendSteps.find(x => x.order == 1).order;
       state.parameters = initData.parameters;
       state.choices = initData.choices.map(x => new Choice(x, state));
@@ -43,6 +44,10 @@ const store: StoreOptions<AppState> = {
         if(x.parameterId == choice.parameterId) x.selected = false;
       });
       choice.selected = true;
+    },
+    SetResults(state: AppState, results: IResultStep[])
+    {
+      state.results = results;
     }
   },
   actions: {
@@ -67,7 +72,6 @@ const store: StoreOptions<AppState> = {
           state.choices
       ).map(x => x.id);
       let distinctedExpressionIds = Array.from(new Set(expressionIds));
-      console.log(distinctedExpressionIds);
 
       try
       {
@@ -75,7 +79,7 @@ const store: StoreOptions<AppState> = {
             .serviceFactory
             .GetDefaultCalculatorService()
             .GetResults(distinctedExpressionIds);
-        console.log(res);
+        commit('SetResults', res);
       }
       catch (e){console.error(e)}
 

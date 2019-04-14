@@ -19,6 +19,7 @@ export interface IChoiceLink extends IEntity
 export interface IChoice extends IContentEntity
 {
     parameterId: number;
+    selected: boolean;
 }
 
 export interface IDocument extends IContentEntity
@@ -103,8 +104,6 @@ export interface IInitial
 
 export class Choice implements IChoice
 {
-    selected: boolean = false;
-
     get disabled(): boolean
     {
         return false;
@@ -115,12 +114,14 @@ export class Choice implements IChoice
     id: number;
     parameterId: number;
     title: string;
+    selected: boolean;
 
     constructor( x: IChoice, state: AppState)
     {
         this.id = x.id;
         this.parameterId = x.parameterId;
         this.title = x.title;
+        this.selected = x.selected;
         this.state = state;
     }
 }
