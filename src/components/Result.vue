@@ -1,5 +1,42 @@
 <template>
     <v-container grid-list-lg>
+        <v-dialog v-model="organisationDialog" width="420">
+            <v-card tile style="min-height:460px">
+                <v-progress-circular
+                    :size="32"
+                    indeterminate
+                    :width="2"
+                    color="primary"
+                    v-if="!$store.state.organisationForView"
+                    style="position:absolute; top: calc(50% - 16px); left: calc(50% - 16px)"
+                ></v-progress-circular>
+                    <template v-else>
+                        <v-card-title class="subheading pa-3 grey lighten-3" primary-title>
+                            {{$store.state.organisationForView.title}}
+                        </v-card-title>
+                        <v-card-text>
+                            <table class="font-weight-medium">
+                                <tr>
+                                    <td class="pa-1">Телефон:</td>
+                                    <td class="pa-1">{{$store.state.organisationForView.phone}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="pa-1">Факс:</td>
+                                    <td class="pa-1">{{$store.state.organisationForView.fax}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="pa-1">Электронная почта:</td>
+                                    <td class="pa-1">{{$store.state.organisationForView.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="pa-1">Адрес:</td>
+                                    <td class="pa-1">{{$store.state.organisationForView.address}}</td>
+                                </tr>
+                            </table>
+                        </v-card-text>
+                    </template>
+            </v-card>
+        </v-dialog>
         <v-progress-circular
                 v-if="!$store.state.results.length"
                 :size="60"
@@ -22,7 +59,7 @@
                     </span>
                 </v-stepper-step>
                 <v-stepper-content :step="sr.stepNum">
-                    <v-card tile class="ma-1 mb-4" height="200px">
+                    <v-card tile class="ma-1 mb-4">
                         <v-data-table
                                 disable-initial-sort
                                 hide-actions
@@ -31,11 +68,17 @@
                                 item-key="procedureId"
                         >
                             <template v-slot:items="props">
-                                <td class="">
+                                <td>
                                     {{ props.item.procedureName }}
                                 </td>
-                                <td class="text-xs-center">
-                                    {{ props.item.organisationName }}
+                                <td>
+                                    <v-btn small flat
+                                           tag="a"
+                                           class="intable-button"
+                                           color="blue darken-2"
+                                           @click="() => selectOrganisation(props.item.organisationId)">
+                                        {{ props.item.organisationName }}
+                                    </v-btn>
                                 </td>
                                 <td class="text-xs-center body-2">
                                     {{ formatDays(props.item) }}
@@ -61,16 +104,24 @@
     export default class Result extends Vue
     {
         e1: number = -1;
+        organisationDialog: boolean = false;
+
         created()
         {
             this.$store.dispatch('LoadResults');
+        }
+
+        selectOrganisation(id: number): void
+        {
+            this.organisationDialog = true;
+            this.$store.dispatch('LoadOrganisation', id);
         }
 
         formatDays(item: IResultItem): string
         {
             return !!item.performingTime
                    ? `до ${item.performingTime} ${item.isTimeByCalendar ? 'календарных' : 'рабочих'} дней`
-                   : "";
+                   : "Договорная";
         }
 
         get headers(): { text: string; sortable: false; value: keyof IResultItem; class: string; }[]
@@ -105,4 +156,17 @@
     };
 
 </script>
+<style lang="scss">
+    .intable-button{
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        .v-btn__content{
+            text-align:center;
+            width: 100%;
+            white-space:normal;
+            font-size: 12px;
+        }
+    }
+</style>
 

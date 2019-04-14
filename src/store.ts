@@ -1,5 +1,5 @@
 import { GetExpressionsByChoiceIds } from "@/model/ChoiceGraphHelper";
-import { IChoiceLink, IExpression, IFrontendStep, IInitial, IParameter, IResultStep } from "@/model/model";
+import { IChoiceLink, IExpression, IFrontendStep, IInitial, IOrganisation, IParameter, IResultStep } from "@/model/model";
 import { Choice } from "@/model/model";
 import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex';
@@ -13,6 +13,7 @@ export class AppState
   expressions: IExpression[] = [];
   links: IChoiceLink[] = [];
   results: IResultStep[] = [];
+  organisationForView: IOrganisation = null;
 }
 
 const store: StoreOptions<AppState> = {
@@ -48,6 +49,14 @@ const store: StoreOptions<AppState> = {
     SetResults(state: AppState, results: IResultStep[])
     {
       state.results = results;
+    },
+    SetOrganisationForView(state: AppState, organisation: IOrganisation)
+    {
+      state.organisationForView = organisation;
+    },
+    ResetOrganisationForView(state: AppState)
+    {
+      state.organisationForView = null;
     }
   },
   actions: {
@@ -60,6 +69,19 @@ const store: StoreOptions<AppState> = {
             .GetDefaultCalculatorService()
             .GetSteps();
         commit('SetInitial', res);
+      }
+      catch(e) {console.error(e)}
+    },
+    async LoadOrganisation({commit}, id: number): Promise<void>
+    {
+      commit('ResetOrganisationForView');
+      try
+      {
+        let res = await window
+            .serviceFactory
+            .GetDefaultCalculatorService()
+            .GetOrganisation(id);
+        commit('SetOrganisationForView', res);
       }
       catch(e) {console.error(e)}
     },
