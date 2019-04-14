@@ -21,12 +21,12 @@
     </v-flex>
 </template>
 <script lang="ts">
-    import { ParameterDbModel } from "@/model/DataModel";
+    import { IParameter } from "@/model/model";
     import {Component, Prop, Vue} from "vue-property-decorator";
 
     @Component
     export default class CalcParameter extends Vue {
-        @Prop() parameter: ParameterDbModel;
+        @Prop() parameter: IParameter;
     }
 
 

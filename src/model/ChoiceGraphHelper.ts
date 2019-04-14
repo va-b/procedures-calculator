@@ -1,12 +1,11 @@
-import { ChoiceLinkDbModel, ExpressionDbModel } from "@/model/DataModel";
-import { Choice } from "@/model/model";
+import { Choice, IChoiceLink, IExpression  } from "@/model/model";
 
 export function GetExpressionsByChoiceIds(
     choiceIds: number[],
-    expressions: ExpressionDbModel[],
-    links: ChoiceLinkDbModel[],
+    expressions: IExpression[],
+    links: IChoiceLink[],
     choices: Choice[]
-): ExpressionDbModel[]
+): IExpression[]
 {
     const isChoiceSelected: (choiceId: number) => boolean =
             choiceId => choices.find(c => c.id == choiceId).selected;

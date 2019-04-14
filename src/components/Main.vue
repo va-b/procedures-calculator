@@ -46,9 +46,9 @@
                     </v-btn>
 
                     <template v-if="$store.getters.IsLastStep">
-                        <v-spacer></v-spacer>
                         <v-btn depressed color="primary"
-                               @click="() => $store.dispatch('LoadResults')"
+                               :disabled="isLoadingResult"
+                               @click="goToResult"
                         >
                             Получить результат
                         </v-btn>
@@ -68,9 +68,19 @@
     })
     export default class Main extends Vue
     {
+        isLoadingResult: boolean = false;
+
         created()
         {
             this.$store.dispatch("LoadInitial");
+        }
+
+        async goToResult()
+        {
+            this.isLoadingResult = true;
+            await this.$store.dispatch('LoadResults');
+            this.isLoadingResult = false;
+            this.$router.push('/result');
         }
     }
 </script>

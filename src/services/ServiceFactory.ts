@@ -6,7 +6,7 @@ import IService, { ApiHelper } from "@/services/IService";
 export default class ServiceFactory implements IServiceFactory
 {
     private readonly servicesStorage: IService[] = [];
-    private readonly getUrl: ApiHelper = url => 'http://192.168.0.65:5000/api/' + url;
+    private readonly getUrl: ApiHelper = url => 'http://muapc.dlinkddns.com:5000/api/' + url;
 
     private getService<TService extends IService>(SC: () => TService, key: string): TService
     {

@@ -1,18 +1,17 @@
 import { GetExpressionsByChoiceIds } from "@/model/ChoiceGraphHelper";
-import { ChoiceLinkDbModel, ExpressionDbModel, FrontendStepDbModel, ParameterDbModel } from "@/model/DataModel";
+import { IChoiceLink, IExpression, IFrontendStep, IInitial, IParameter } from "@/model/model";
 import { Choice } from "@/model/model";
-import { IInitial } from "@/services/ICalculatorService";
 import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex';
 
 export class AppState
 {
   public currentStepNumber = null;
-  frontendSteps: FrontendStepDbModel[] = [];
-  parameters: ParameterDbModel[] = [];
+  frontendSteps: IFrontendStep[] = [];
+  parameters: IParameter[] = [];
   choices: Choice[] = [];
-  expressions: ExpressionDbModel[] =[];
-  links: ChoiceLinkDbModel[] =[];
+  expressions: IExpression[] =[];
+  links: IChoiceLink[] =[];
 }
 
 const store: StoreOptions<AppState> = {
