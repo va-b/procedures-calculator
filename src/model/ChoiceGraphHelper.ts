@@ -1,4 +1,4 @@
-import { Choice, IChoiceLink, IExpression  } from "@/model/model";
+import { Choice, IChoiceLink, IExpression  } from "@/model/CommonModels";
 
 export function GetExpressionsByChoiceIds(
     choiceIds: number[],

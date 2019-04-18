@@ -1,6 +1,6 @@
 import { GetExpressionsByChoiceIds } from "@/model/ChoiceGraphHelper";
-import { IChoiceLink, IExpression, IFrontendStep, IInitial, IOrganisation, IParameter, IResultStep } from "@/model/model";
-import { Choice } from "@/model/model";
+import { IChoiceLink, IExpression, IFrontendStep, IInitial, IOrganisation, IParameter, IResultStep } from "@/model/CommonModels";
+import { Choice } from "@/model/CommonModels";
 import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex';
 

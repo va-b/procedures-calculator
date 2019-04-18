@@ -1,4 +1,4 @@
-import { IInitial, IOrganisation, IResultStep } from "@/model/model";
+import { IInitial, IOrganisation, IResultStep } from "@/model/CommonModels";
 import ICalculatorService from "@/services/ICalculatorService";
 import { ApiHelper } from "@/services/IService";
 import axios from 'axios';

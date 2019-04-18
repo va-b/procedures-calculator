@@ -1,4 +1,4 @@
-import { IInitial, IOrganisation, IResultStep } from "@/model/model";
+import { IInitial, IOrganisation, IResultStep } from "@/model/CommonModels";
 import IService from "@/services/IService";
 
 export default interface ICalculatorService extends IService

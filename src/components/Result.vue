@@ -43,8 +43,7 @@
                 :width="3"
                 color="primary"
                 indeterminate
-                style="position:absolute; top: calc(50% - 30px); left: calc(50% - 30px)"
-        ></v-progress-circular>
+                class="circulator"/>
         <v-stepper v-else v-model="e1" vertical>
             <template v-for="sr in $store.state.results">
                 <v-stepper-step
@@ -97,7 +96,7 @@
 </template>
 <script lang="ts">
 
-    import { IResultItem } from "@/model/model";
+    import { IResultItem } from "@/model/CommonModels";
     import { Component, Vue } from "vue-property-decorator";
 
     @Component

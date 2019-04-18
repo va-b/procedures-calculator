@@ -14,7 +14,6 @@
                     <template v-slot:activator="{ on }">
                         <v-btn small flat icon  class="ma-0 ml-3" color="grey" v-on="on">
                             <v-icon small light>fa-question-circle</v-icon>
-
                         </v-btn>
                     </template>
                     <span>{{parameter.description}}</span>
@@ -38,7 +37,7 @@
     </v-flex>
 </template>
 <script lang="ts">
-    import { IParameter } from "@/model/model";
+    import { IParameter } from "@/model/CommonModels";
     import { Component, Prop, Vue } from "vue-property-decorator";
 
     @Component

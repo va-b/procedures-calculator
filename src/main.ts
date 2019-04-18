@@ -1,10 +1,10 @@
-import '@babel/polyfill'
-import Vue from 'vue'
-import './plugins/vuetify'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-import './assets/global-styles.scss'
+import '@babel/polyfill';
+import Vue from 'vue';
+import './plugins/vuetify';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import './assets/global-styles.scss';
 import IServiceFactory from "@/services/IServiceFactory";
 import ServiceFactory from "@/services/ServiceFactory";
 
