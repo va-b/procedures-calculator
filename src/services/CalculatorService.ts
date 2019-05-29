@@ -1,28 +1,24 @@
 import { IInitial, IOrganisation, IResultStep } from "@/model/CommonModels";
 import ICalculatorService from "@/services/ICalculatorService";
 import { ApiHelper } from "@/services/IService";
-import axios from 'axios';
 
 export default class CalculatorService implements ICalculatorService
 {
     constructor(private readonly geturl: ApiHelper){}
 
-    async GetSteps(): Promise<IInitial[]>
+    GetSteps(): Promise<IInitial[]>
     {
-        let res = await axios.get<IInitial[]>(this.geturl('initial'));
-        return res.data;
+        return window.$http.get<IInitial[]>(this.geturl('initial'));
     }
 
-    async GetResults( expressionIds: number[] ): Promise<IResultStep[]>
+    GetResults( expressionIds: number[] ): Promise<IResultStep[]>
     {
-        let res = await axios.post<IResultStep[]>(this.geturl('results'), expressionIds);
-        return res.data;
+        return window.$http.post<IResultStep[]>(this.geturl('results'), JSON.stringify(expressionIds));
     }
 
-    async GetOrganisation( id: number ): Promise<IOrganisation>
+    GetOrganisation( id: number ): Promise<IOrganisation>
     {
-        let res = await axios.get<IOrganisation>(this.geturl(`organisation?id=${id}`));
-        return res.data;
+        return window.$http.get<IOrganisation>(this.geturl(`organisation?id=${id}`));
     }
 
 }
