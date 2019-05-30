@@ -18,10 +18,6 @@ export class AppState
   frontendSteps: IFrontendStep[] = [];
   parameters: IParameter[] = [];
   choices: IChoice[] = [];
-  //Индексированное хранилище ссылок на Choice
-  choicesIndex: {[key: number]: IChoice} = {};
-  //Индексированное по parameterId хранилище ссылок на Choice
-  parameterIdChoicesIndex: {[key: number]: IChoice[]} = {};
   expressions: IExpression[] = [];
   links: IChoiceLink[] = [];
   results: IResultStep[] = [];
@@ -40,13 +36,6 @@ const store: StoreOptions<AppState> = {
       state.choices = initData.choices;
       state.links = initData.links;
       state.expressions = initData.expressions;
-
-      //
-      state.choices.forEach(x => state.choicesIndex[x.id] = x);
-      state.parameters.forEach(
-          x => state.parameterIdChoicesIndex[x.id] = state.choices.filter(c => c.parameterId == x.id)
-      );
-      //
     },
     FrontendStepNext(state: AppState)
     {
@@ -60,10 +49,8 @@ const store: StoreOptions<AppState> = {
     },
     CheckChoice(state: AppState, choiceId: number)
     {
-      let choice = state.choicesIndex[choiceId];
-      state.parameterIdChoicesIndex[choice.parameterId].forEach(x => {
-        x.selected = false;
-      });
+      let choice = state.choices.find(x => x.id == choiceId);
+      state.choices.filter(x => x.parameterId == choice.parameterId).forEach(x => x.selected = false);
       choice.selected = true;
     },
     SetResults(state: AppState, results: IResultStep[])
@@ -105,21 +92,14 @@ const store: StoreOptions<AppState> = {
       }
       catch(e) {console.error(e)}
     },
-    async LoadResults({commit, state}): Promise<void>
+    async LoadResults({commit, state}, expressionIds: number[]): Promise<void>
     {
-      let expressionIds = GetExpressionsByChoiceIds(
-          state.expressions,
-          state.links,
-          state.choices
-      ).map(x => x.id);
-      let distinctedExpressionIds = Array.from(new Set(expressionIds));
-
       try
       {
         let res = await window
             .$services
             .GetDefaultCalculatorService()
-            .GetResults(distinctedExpressionIds);
+            .GetResults(expressionIds);
         commit('SetResults', res);
       }
       catch (e){console.error(e)}
@@ -130,11 +110,11 @@ const store: StoreOptions<AppState> = {
     IsFirstStep: state => state.currentStepNumber == 1,
     IsLastStep:  state => state.currentStepNumber == state.frontendSteps[state.frontendSteps.length - 1].order,
     CurrentParams: state => state.parameters.filter(x => x.frontendStepId == state.currentStepNumber),
-    ChoicesForParameter: state => parameterId => state.parameterIdChoicesIndex[parameterId],
-    IsChoiceDisabled: state => choiceId => IsChoiceDisabled(choiceId, state.links, state.choicesIndex),
+    ChoicesForParameter: state => parameterId => state.choices.filter(x => x.parameterId == parameterId),
+    IsChoiceDisabled: state => choiceId => IsChoiceDisabled(choiceId, state.links, state.choices),
     SelectedChoiceIdForParameter: state => parameterId =>
     {
-      let res = state.parameterIdChoicesIndex[parameterId].find(x => x.selected);
+      let res = state.choices.filter(x => x.parameterId == parameterId).find(x => x.selected);
       return !!res ? res.id : null;
     }
   }

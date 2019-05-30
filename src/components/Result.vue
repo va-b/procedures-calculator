@@ -1,42 +1,6 @@
 <template>
     <v-container grid-list-lg>
-        <v-dialog v-model="organisationDialog" width="420">
-            <v-card tile style="min-height:460px">
-                <v-progress-circular
-                    :size="32"
-                    indeterminate
-                    :width="2"
-                    color="primary"
-                    v-if="!$store.state.organisationForView"
-                    style="position:absolute; top: calc(50% - 16px); left: calc(50% - 16px)"
-                ></v-progress-circular>
-                    <template v-else>
-                        <v-card-title class="subheading pa-3 grey lighten-3" primary-title>
-                            {{$store.state.organisationForView.title}}
-                        </v-card-title>
-                        <v-card-text>
-                            <table class="font-weight-medium">
-                                <tr>
-                                    <td class="pa-1">Телефон:</td>
-                                    <td class="pa-1">{{$store.state.organisationForView.phone}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="pa-1">Факс:</td>
-                                    <td class="pa-1">{{$store.state.organisationForView.fax}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="pa-1">Электронная почта:</td>
-                                    <td class="pa-1">{{$store.state.organisationForView.email}}</td>
-                                </tr>
-                                <tr>
-                                    <td class="pa-1">Адрес:</td>
-                                    <td class="pa-1">{{$store.state.organisationForView.address}}</td>
-                                </tr>
-                            </table>
-                        </v-card-text>
-                    </template>
-            </v-card>
-        </v-dialog>
+        <organisation-view v-model="organisationDialog"/>
         <v-progress-circular
                 v-if="!$store.state.results.length"
                 :size="60"
@@ -96,18 +60,23 @@
 </template>
 <script lang="ts">
 
+    import OrganisationView from "@/components/OrganisationView.vue";
     import { IResultItem } from "@/model/CommonModels";
     import { Component, Vue } from "vue-property-decorator";
-
-    @Component
+    @Component({
+        components: { OrganisationView },
+    })
     export default class Result extends Vue
     {
         e1: number = -1;
         organisationDialog: boolean = false;
 
-        created()
+        mounted()
         {
-            this.$store.dispatch('LoadResults');
+            let params = this.$route.params.exquery;
+            //todo: get запрос
+            let expressionIds = params.split("_").map(x => parseInt(x));
+            this.$store.dispatch('LoadResults', expressionIds);
         }
 
         selectOrganisation(id: number): void

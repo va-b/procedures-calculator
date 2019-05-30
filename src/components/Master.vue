@@ -51,7 +51,7 @@
 
                         <v-btn  v-if="$store.getters.IsLastStep"
                                 depressed color="primary"
-                                @click="$router.push('/result')"
+                                @click="ComputeResults"
                         >
                             Получить результат
                         </v-btn>
@@ -62,7 +62,8 @@
 </template>
 
 <script lang="ts">
-    import { Component, Vue, Watch } from "vue-property-decorator";
+    import { GetExpressionsByChoiceIds } from "@/model/ChoiceGraphHelper";
+    import { Component, Vue } from "vue-property-decorator";
     import CalcParameter from "./CalcParameter.vue";
 
     @Component({ components: { CalcParameter } })
@@ -71,6 +72,17 @@
         created()
         {
             this.$store.dispatch("LoadInitial");
+        }
+
+
+        ComputeResults(): void
+        {
+            let exquery = GetExpressionsByChoiceIds(
+                this.$store.state.expressions,
+                this.$store.state.links,
+                this.$store.state.choices
+            ).map(x => x.id.toString()).join("_");
+            this.$router.push(`/result/${exquery}`)
         }
     }
 </script>

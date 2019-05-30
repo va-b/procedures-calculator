@@ -17,7 +17,7 @@ export default new Router({
         component: StartPage
     },
     {
-        path: '/result',
+        path: '/result/:exquery',
         component: Result
     },
 

@@ -2,19 +2,7 @@
   <v-app>
     <v-content>
       <v-container v-show="!isStartPage" grid-list-lg class="pb-0">
-        <v-dialog v-model="helpDialog" scrollable width="640">
-          <v-card tile>
-            <v-card-title class="subheading pa-3 grey lighten-3" primary-title>
-              Калькулятор процедур в сфере строительства Тамбовской области
-            </v-card-title>
-            <v-card-text style="max-height:424px">
-              <p>Калькулятор процедур в сфере строительства должен «сопровождать» застройщика на каждом шагу оформления документов в процессе строительства, должны содержать необходимые ссылки на документы, адреса и реквизиты выдающих и согласующих документы инстанций.</p>
-              <p>Калькулятор процедур в сфере строительства должен содержать информацию о документальном сопровождении на всех этапах строительства, которую необходимо знать застройщику (имеющему земельный участок), начиная от получения ГПЗУ до регистрации права собственности на построенный объект капитального строительства.</p>
-              <p>Задав тип планируемого объекта, а также градостроительные условия и ограничения развития территорий, застройщик заранее сможет получить исчерпывающую информацию о последовательности прохождения процедур, о документах, сроках, стоимости процедур, органах и организациях, куда следует обратиться. Выбор параметров строительного объекта и их поэтапное уточнение, начиная от назначения объекта до проецированного программой модели действий упрощающей работу застройщика при проектировании объекта.</p>
-              <p>Для использования сервиса рекомендуется использовать: Chrome, Safari, 10+, Firefox, Edge.</p>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
+        <help-view v-model="helpDialog"/>
         <v-card tile color="primary">
           <v-card-title class="py-2">
             <img src="http://archit.tmbreg.ru/assets/files/news/calculator/gerb-small.png"
@@ -49,9 +37,12 @@
   </v-app>
 </template>
 <script lang="ts">
+import HelpView from "@/components/HelpView.vue";
 import {Vue, Component} from "vue-property-decorator";
 
-@Component
+@Component({
+  components: { HelpView },
+})
 export default class App extends Vue
 {
   helpDialog: boolean = false;
