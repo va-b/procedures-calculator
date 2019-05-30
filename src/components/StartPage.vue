@@ -33,7 +33,7 @@
                                 </v-card-text>
                                 <v-card-actions class="justify-center pb-3">
                                     <v-btn large dark color="primary" to="/master">
-                                        Открыть Онлайн-калькулятор (Demo-версия)
+                                        Открыть Онлайн-калькулятор
                                     </v-btn>
                                 </v-card-actions>
                             </v-card>

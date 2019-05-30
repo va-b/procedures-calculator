@@ -1,9 +1,9 @@
 <template functional>
-    <v-dialog @input="listeners.input" :value="props.value" scrollable width="460">
+    <v-dialog @input="listeners.input" :value="props.value" scrollable width="480">
         <v-card tile>
             <v-progress-circular :size="32" indeterminate :width="2" color="primary" v-if="!parent.$store.state.organisationForView" style="position:absolute; top: calc(50% - 16px); left: calc(50% - 16px)"></v-progress-circular>
             <template v-else>
-                <v-card-title class="subheading pa-3 grey lighten-3" primary-title>
+                <v-card-title class="subheading pa-3 grey lighten-3" primary-title  style="flex-wrap:nowrap!important;">
                     <div>{{parent.$store.state.organisationForView.title}}</div>
                     <v-spacer/>
                     <v-btn @click="listeners.input(false)" flat small icon class="ma-0" color="grey darken-1">
