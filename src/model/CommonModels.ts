@@ -1,5 +1,3 @@
-import { AppState } from "@/store";
-
 interface IEntity
 {
     id: number;
@@ -20,6 +18,7 @@ export interface IChoice extends IContentEntity
 {
     parameterId: number;
     selected: boolean;
+    disabled?: boolean;
 }
 
 export interface IDocument extends IContentEntity
@@ -100,28 +99,4 @@ export interface IInitial
     choices: IChoice[];
     expressions: IExpression[];
     links: IChoiceLink[];
-}
-
-export class Choice implements IChoice
-{
-    get disabled(): boolean
-    {
-        return false;
-    }
-
-    private state: AppState;
-
-    id: number;
-    parameterId: number;
-    title: string;
-    selected: boolean;
-
-    constructor( x: IChoice, state: AppState)
-    {
-        this.id = x.id;
-        this.parameterId = x.parameterId;
-        this.title = x.title;
-        this.selected = x.selected;
-        this.state = state;
-    }
 }

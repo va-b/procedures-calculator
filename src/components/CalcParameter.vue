@@ -2,7 +2,7 @@
     <v-flex>
         <v-card>
             <v-card-title style="flex-wrap: nowrap;">
-                <v-avatar :size="48" class="mr-3">
+                <v-avatar :size="52" class="mr-3">
                     <img :src="parameter.imageUrl"/>
                 </v-avatar>
                 <div>{{parameter.title}}</div>
@@ -30,6 +30,7 @@
                             :key="choice.id"
                             :label="choice.title"
                             :value="choice.id"
+                            :disabled="$store.getters.IsChoiceDisabled(choice.id)"
                     ></v-radio>
                 </v-radio-group>
             </v-card-text>

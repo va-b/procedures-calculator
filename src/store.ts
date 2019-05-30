@@ -1,6 +1,14 @@
-import { GetExpressionsByChoiceIds } from "@/model/ChoiceGraphHelper";
-import { IChoiceLink, IExpression, IFrontendStep, IInitial, IOrganisation, IParameter, IResultStep } from "@/model/CommonModels";
-import { Choice } from "@/model/CommonModels";
+import {GetExpressionsByChoiceIds, IsChoiceDisabled} from "@/model/ChoiceGraphHelper";
+import {
+  IChoice,
+  IChoiceLink,
+  IExpression,
+  IFrontendStep,
+  IInitial,
+  IOrganisation,
+  IParameter,
+  IResultStep
+} from "@/model/CommonModels";
 import Vue from 'vue'
 import Vuex, { StoreOptions } from 'vuex';
 
@@ -9,13 +17,18 @@ export class AppState
   public currentStepNumber = null;
   frontendSteps: IFrontendStep[] = [];
   parameters: IParameter[] = [];
-  choices: Choice[] = [];
+  choices: IChoice[] = [];
+  //Индексированное хранилище ссылок на Choice
+  choicesIndex: {[key: number]: IChoice} = {};
+  //Индексированное по parameterId хранилище ссылок на Choice
+  parameterIdChoicesIndex: {[key: number]: IChoice[]} = {};
   expressions: IExpression[] = [];
   links: IChoiceLink[] = [];
   results: IResultStep[] = [];
   organisationForView: IOrganisation = null;
 }
 
+//TODO: скорее всего Vuex здесь вовсе не нужен
 const store: StoreOptions<AppState> = {
   state: new AppState(),
   mutations: {
@@ -24,9 +37,16 @@ const store: StoreOptions<AppState> = {
       state.frontendSteps = initData.frontendSteps;
       state.currentStepNumber = initData.frontendSteps.find(x => x.order == 1).order;
       state.parameters = initData.parameters;
-      state.choices = initData.choices.map(x => new Choice(x, state));
+      state.choices = initData.choices;
       state.links = initData.links;
       state.expressions = initData.expressions;
+
+      //
+      state.choices.forEach(x => state.choicesIndex[x.id] = x);
+      state.parameters.forEach(
+          x => state.parameterIdChoicesIndex[x.id] = state.choices.filter(c => c.parameterId == x.id)
+      );
+      //
     },
     FrontendStepNext(state: AppState)
     {
@@ -40,9 +60,9 @@ const store: StoreOptions<AppState> = {
     },
     CheckChoice(state: AppState, choiceId: number)
     {
-      let choice = state.choices.find(x => x.id == choiceId);
-      state.choices.forEach(x => {
-        if(x.parameterId == choice.parameterId) x.selected = false;
+      let choice = state.choicesIndex[choiceId];
+      state.parameterIdChoicesIndex[choice.parameterId].forEach(x => {
+        x.selected = false;
       });
       choice.selected = true;
     },
@@ -88,7 +108,6 @@ const store: StoreOptions<AppState> = {
     async LoadResults({commit, state}): Promise<void>
     {
       let expressionIds = GetExpressionsByChoiceIds(
-          state.choices.filter(x => x.selected).map(x => x.id),
           state.expressions,
           state.links,
           state.choices
@@ -111,11 +130,11 @@ const store: StoreOptions<AppState> = {
     IsFirstStep: state => state.currentStepNumber == 1,
     IsLastStep:  state => state.currentStepNumber == state.frontendSteps[state.frontendSteps.length - 1].order,
     CurrentParams: state => state.parameters.filter(x => x.frontendStepId == state.currentStepNumber),
-    ChoicesForParameter: state => parameterId =>
-        state.choices.filter(x => x.parameterId == parameterId),
+    ChoicesForParameter: state => parameterId => state.parameterIdChoicesIndex[parameterId],
+    IsChoiceDisabled: state => choiceId => IsChoiceDisabled(choiceId, state.links, state.choicesIndex),
     SelectedChoiceIdForParameter: state => parameterId =>
     {
-      let res = state.choices.find(x => x.parameterId == parameterId && x.selected);
+      let res = state.parameterIdChoicesIndex[parameterId].find(x => x.selected);
       return !!res ? res.id : null;
     }
   }
