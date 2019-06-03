@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-content>
-      <v-container v-show="!isStartPage" grid-list-lg class="pb-0">
+      <v-container v-show="$route.name !== 'start'" grid-list-lg class="pb-0">
         <help-view v-model="helpDialog"/>
         <v-card tile color="primary">
           <v-card-title class="py-2">
@@ -12,7 +12,7 @@
               Калькулятор процедур в сфере строительства
             </div>
             <v-spacer/>
-            <v-btn v-show="isResultPage"
+            <v-btn v-show="$route.name === 'result'"
                    round small depressed
                    color="white"
                    class="primary--text"
@@ -46,15 +46,7 @@ import {Vue, Component} from "vue-property-decorator";
 export default class App extends Vue
 {
   helpDialog: boolean = false;
-  get isStartPage(): boolean
-  {
-    return this.$route.fullPath == '/';
-  }
 
-  get isResultPage(): boolean
-  {
-    return this.$route.fullPath == '/result';
-  }
 }
 </script>
 <style lang="scss">

@@ -10,15 +10,18 @@ export default new Router({
   routes: [
     {
       path: '/master',
-      component: Main
+      component: Main,
+      name: 'master'
     },
     {
         path: '/',
-        component: StartPage
+        component: StartPage,
+        name: 'start'
     },
     {
         path: '/result/:exquery',
-        component: Result
+        component: Result,
+        name: 'result'
     },
 
   ]
