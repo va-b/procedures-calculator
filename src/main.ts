@@ -4,16 +4,16 @@ import './plugins/vuetify';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import './assets/global-styles.scss';
-import IServiceFactory from "@/services/IServiceFactory";
-import ServiceFactory from "@/services/ServiceFactory";
+import './assets/global-styles.css';
 import Fetcher from "@/services/Fetcher";
+import CalculatorService from "@/services/CalculatorService";
+import ICalculatorService from "@/services/ICalculatorService";
 
 Vue.config.productionTip = false;
 
 declare global {
   interface Window {
-    $services: IServiceFactory;
+    $service: ICalculatorService;
     $http: IHttpClient;
     vm: Vue;
   }
@@ -34,7 +34,7 @@ declare global {
 
 
 window.$http = new Fetcher();
-window.$services = new ServiceFactory();
+window.$service = new CalculatorService(url => 'http://37.235.251.79:5000/api/' + url)
 window.vm = new Vue({
   router,
   store,

@@ -1,7 +1,8 @@
 import Vue from 'vue'
-import Vuetify, {VuetifyUseOptions} from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+import Vuetify from 'vuetify/lib'
+import {VuetifyUseOptions} from 'vuetify'
 import ru from 'vuetify/src/locale/ru'
+import 'vuetify/src/stylus/app.styl'
 
 const vuetifyConfig: VuetifyUseOptions = {
     lang: {

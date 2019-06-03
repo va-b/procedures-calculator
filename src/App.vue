@@ -49,16 +49,3 @@ export default class App extends Vue
 
 }
 </script>
-<style lang="scss">
-  /*
-  .help-btn
-  {
-    border-radius: 50%;
-    border: 5px solid transparent;
-    background-color: transparent;
-    margin-right: 8px;
-    transition: background-color .2s ease-in-out;
-    &:hover, &:active, &:focus { background-color: rgba(255,255,255,.3); }
-  }
-   */
-</style>

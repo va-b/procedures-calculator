@@ -124,17 +124,17 @@
     };
 
 </script>
-<style lang="scss">
+<style>
     .intable-button{
         height: 100%;
         margin: 0;
         width: 100%;
-        .v-btn__content{
-            text-align:center;
-            width: 100%;
-            white-space:normal;
-            font-size: 12px;
-        }
+    }
+    .intable-button .v-btn__content{
+        text-align:center;
+        width: 100%;
+        white-space:normal;
+        font-size: 12px;
     }
 </style>
 

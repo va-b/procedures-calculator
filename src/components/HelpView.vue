@@ -1,10 +1,10 @@
-<template functional>
-    <v-dialog @input="listeners.input" :value="props.value" scrollable width="640">
+<template>
+    <v-dialog @input="$listeners.input" :value="value" scrollable width="640">
         <v-card tile>
             <v-card-title class="subheading pa-3 grey lighten-3" primary-title>
                 <div>Калькулятор процедур в сфере строительства Тамбовской области</div>
                 <v-spacer/>
-                <v-btn @click="listeners.input(false)" flat small icon class="ma-0" color="grey darken-1">
+                <v-btn @click="$listeners.input(false)" flat small icon class="ma-0" color="grey darken-1">
                     <v-icon>fa-times</v-icon>
                 </v-btn>
             </v-card-title>

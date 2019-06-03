@@ -1,12 +1,12 @@
-<template functional>
+<template>
     <v-flex>
         <v-card>
             <v-card-title style="flex-wrap: nowrap;">
                 <v-avatar :size="52" class="mr-3">
-                    <img :src="props.parameter.imageUrl"/>
+                    <img :src="parameter.imageUrl"/>
                 </v-avatar>
-                <div>{{props.parameter.title}}</div>
-                <v-tooltip v-if="!!props.parameter.description"
+                <div>{{parameter.title}}</div>
+                <v-tooltip v-if="!!parameter.description"
                            :close-delay="500"
                            :max-width="500"
                            right
@@ -16,21 +16,21 @@
                             <v-icon small light>fa-question-circle</v-icon>
                         </v-btn>
                     </template>
-                    <span>{{props.parameter.description}}</span>
+                    <span>{{parameter.description}}</span>
                 </v-tooltip>
             </v-card-title>
             <v-card-text class="pt-0">
                 <v-radio-group
-                        :value="parent.$store.getters.SelectedChoiceIdForParameter(props.parameter.id)"
-                        @change="v => parent.$store.commit('CheckChoice', v)"
+                        :value="$store.getters.SelectedChoiceIdForParameter(parameter.id)"
+                        @change="v => $store.commit('CheckChoice', v)"
                         class="mt-0"
                 >
                     <v-radio
-                            v-for="choice in parent.$store.getters.ChoicesForParameter(props.parameter.id)"
+                            v-for="choice in $store.getters.ChoicesForParameter(parameter.id)"
                             :key="choice.id"
                             :label="choice.title"
                             :value="choice.id"
-                            :disabled="parent.$store.getters.IsChoiceDisabled(choice.id)"
+                            :disabled="$store.getters.IsChoiceDisabled(choice.id)"
                     ></v-radio>
                 </v-radio-group>
             </v-card-text>

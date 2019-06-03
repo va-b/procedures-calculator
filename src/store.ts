@@ -72,8 +72,7 @@ const store: StoreOptions<AppState> = {
       try
       {
         let res = await window
-            .$services
-            .GetDefaultCalculatorService()
+            .$service
             .GetSteps();
         commit('SetInitial', res);
       }
@@ -85,9 +84,7 @@ const store: StoreOptions<AppState> = {
       try
       {
         let res = await window
-            .$services
-            .GetDefaultCalculatorService()
-            .GetOrganisation(id);
+            .$service.GetOrganisation(id);
         commit('SetOrganisationForView', res);
       }
       catch(e) {console.error(e)}
@@ -97,9 +94,7 @@ const store: StoreOptions<AppState> = {
       try
       {
         let res = await window
-            .$services
-            .GetDefaultCalculatorService()
-            .GetResults(expressionIds);
+            .$service.GetResults(expressionIds);
         commit('SetResults', res);
       }
       catch (e){console.error(e)}
