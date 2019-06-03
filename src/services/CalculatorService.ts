@@ -13,7 +13,7 @@ export default class CalculatorService implements ICalculatorService
 
     GetResults( expressionIds: number[] ): Promise<IResultStep[]>
     {
-        return window.$http.post<IResultStep[]>(this.geturl('results'), JSON.stringify(expressionIds));
+        return window.$http.get<IResultStep[]>(this.geturl(`results?exids=${expressionIds.join('_')}`));
     }
 
     GetOrganisation( id: number ): Promise<IOrganisation>
