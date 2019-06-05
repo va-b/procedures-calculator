@@ -1,21 +1,16 @@
-# procedures-calculator
+# Калькулятор процедур
 
-## Project setup
+## Установить зависимости
 ```
-npm install
+npm run getpg
 ```
 
-### Compiles and hot-reloads for development
+### Запустить в режиме разработки
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Собрать приложение и развернуть сервер на локальной машине
 ```
-npm run build
-```
-
-### Start backend
-```
-npm run startServer
+npm run localDeploy
 ```

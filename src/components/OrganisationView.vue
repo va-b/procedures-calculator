@@ -1,11 +1,11 @@
 <template>
     <v-dialog @input="$listeners.input" :value="value" scrollable width="480">
         <v-card tile style="min-height:400px">
-            <v-progress-circular :size="32" indeterminate :width="2" color="primary" v-if="!$store.state.organisationForView"
+            <v-progress-circular :size="32" indeterminate :width="2" color="primary" v-if="!$store.state.OrganisationForView"
                                  style="position:absolute; top: calc(50% - 16px); left: calc(50% - 16px)"></v-progress-circular>
             <template v-else>
                 <v-card-title class="subheading pa-3 grey lighten-3" primary-title  style="flex-wrap:nowrap!important;">
-                    <div>{{$store.state.organisationForView.title}}</div>
+                    <div>{{$store.state.OrganisationForView.Title}}</div>
                     <v-spacer/>
                     <v-btn @click="$listeners.input(false)" flat small icon class="ma-0" color="grey darken-1">
                         <v-icon>fa-times</v-icon>
@@ -15,19 +15,19 @@
                     <table class="font-weight-medium">
                         <tr>
                             <td class="pa-1">Телефон:</td>
-                            <td class="pa-1">{{$store.state.organisationForView.phone}}</td>
+                            <td class="pa-1">{{$store.state.OrganisationForView.Phone}}</td>
                         </tr>
                         <tr>
                             <td class="pa-1">Факс:</td>
-                            <td class="pa-1">{{$store.state.organisationForView.fax}}</td>
+                            <td class="pa-1">{{$store.state.OrganisationForView.Fax}}</td>
                         </tr>
                         <tr>
                             <td class="pa-1">Электронная почта:</td>
-                            <td class="pa-1">{{$store.state.organisationForView.email}}</td>
+                            <td class="pa-1">{{$store.state.OrganisationForView.Email}}</td>
                         </tr>
                         <tr>
                             <td class="pa-1">Адрес:</td>
-                            <td class="pa-1">{{$store.state.organisationForView.address}}</td>
+                            <td class="pa-1">{{$store.state.OrganisationForView.address}}</td>
                         </tr>
                     </table>
                 </v-card-text>

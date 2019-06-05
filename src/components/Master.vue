@@ -1,37 +1,37 @@
 <template>
         <v-container grid-list-lg>
             <v-progress-circular
-                    v-if="!$store.state.frontendSteps.length"
+                    v-if="!$store.state.FrontendSteps.length"
                     :size="60"
                     :width="3"
                     color="primary"
                     indeterminate
                     class="circulator"/>
-            <v-stepper class="c-stepper" alt-labels v-else :value="$store.state.currentStepNumber">
+            <v-stepper class="c-stepper" alt-labels v-else :value="$store.state.CurrentStepNumber">
                 <v-stepper-header>
-                    <template v-for="step in $store.state.frontendSteps">
+                    <template v-for="step in $store.state.FrontendSteps">
                         <v-stepper-step class="pa-3"
-                                        :style="{flexBasis: `${100/$store.state.frontendSteps.length}%!important`}"
-                                        :complete="$store.state.currentStepNumber >= step.order"
-                                        :step="step.order"
-                                        :key="step.id"
+                                        :style="{flexBasis: `${100/$store.state.FrontendSteps.length}%!important`}"
+                                        :complete="$store.state.CurrentStepNumber >= step.Order"
+                                        :step="step.Order"
+                                        :key="step.Id"
                         >
-                            {{step.title}}
+                            {{step.Title}}
                         </v-stepper-step>
                         <v-divider v-if="$store.getters.IsLastStep"/>
                     </template>
                 </v-stepper-header>
 
                 <v-stepper-items>
-                    <v-stepper-content v-for="step in $store.state.frontendSteps" :key="step.id" :step="step.order">
+                    <v-stepper-content v-for="step in $store.state.FrontendSteps" :key="step.Id" :step="step.Order">
                         <v-card flat class="xs-12 md-8 lg-6 xl-4">
                             <v-card-title class="title">
-                                {{step.title}}
+                                {{step.Title}}
                             </v-card-title>
                             <v-card-text class="title">
                                 <v-layout column>
                                     <calc-parameter v-for="parameter in $store.getters.CurrentParams"
-                                                    :key="parameter.title"
+                                                    :key="parameter.Title"
                                                     :parameter="parameter"/>
                                 </v-layout>
                             </v-card-text>
@@ -78,10 +78,10 @@
         ComputeResults(): void
         {
             let exquery = GetExpressionsByChoiceIds(
-                this.$store.state.expressions,
-                this.$store.state.links,
-                this.$store.state.choices
-            ).map(x => x.id.toString()).join("_");
+                this.$store.state.Expressions,
+                this.$store.state.Links,
+                this.$store.state.Choices
+            ).map(x => x.Id.toString()).join("_");
             this.$router.push(`/result/${exquery}`)
         }
     }

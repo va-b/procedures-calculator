@@ -1,23 +1,23 @@
 interface IEntity
 {
-    id: number;
+    Id: number;
 }
 
 interface IContentEntity extends IEntity
 {
-    title: string;
+    Title: string;
 }
 
 export interface IChoiceLink extends IEntity
 {
-    chS: number;
-    chE: number;
+    ChS: number;
+    ChE: number;
 }
 
 export interface IChoice extends IContentEntity
 {
-    parameterId: number;
-    selected: boolean;
+    ParameterId: number;
+    Selected: boolean;
     disabled?: boolean;
 }
 
@@ -26,46 +26,46 @@ export interface IDocument extends IContentEntity
 
 export interface IExpression extends IEntity
 {
-    choiceId: number;
-    procedureId: number;
+    ChoiceId: number;
+    ProcedureId: number;
 }
 
 export interface IFrontendStep extends IContentEntity
 {
-    order: number;
+    Order: number;
 }
 
 export interface IOrganisation extends IContentEntity
 {
-    phone: string;
-    fax: string;
-    email: string;
-    address: string;
-    latitude: number;
-    longitude: number;
-    isByGovernment: boolean;
-    subregionId: number;
+    Phone: string;
+    Fax: string;
+    Email: string;
+    Address: string;
+    Latitude: number;
+    Longitude: number;
+    IsByGovernment: boolean;
+    SubregionId: number;
 }
 
 export interface IParameter extends IContentEntity
 {
-    description: string;
-    imageUrl: string;
-    frontendStepId: number;
+    Description: string;
+    ImageUrl: string;
+    FrontendStepId: number;
 }
 
 export interface IProcedure extends IContentEntity
 {
-    performingTime: number;
-    isTimeByCalendar: boolean;
-    organisationId: number;
-    documentId: number;
-    stageId: number;
+    PerformingTime: number;
+    IsTimeByCalendar: boolean;
+    OrganisationId: number;
+    DocumentId: number;
+    StageId: number;
 }
 
 export interface StageDbModel extends IContentEntity
 {
-    order: number;
+    Order: number;
 }
 
 export interface SubregionDbModel extends IContentEntity
@@ -73,30 +73,30 @@ export interface SubregionDbModel extends IContentEntity
 
 export interface IResultItem
 {
-    stageId: number;
-    procedureId: number;
-    procedureName: string;
-    organisationId: number;
-    organisationName: string;
-    performingTime: number|null;
-    isTimeByCalendar: boolean;
-    documentName: string;
+    StageId: number;
+    ProcedureId: number;
+    ProcedureName: string;
+    OrganisationId: number;
+    OrganisationName: string;
+    PerformingTime: number|null;
+    IsTimeByCalendar: boolean;
+    DocumentName: string;
 }
 
 export interface IResultStep
 {
-    stepId: number;
-    stepNum: number;
-    stepName: string;
-    totalTime: number;
-    items: IResultItem[];
+    StepId: number;
+    StepNum: number;
+    StepName: string;
+    TotalTime: number;
+    Items: IResultItem[];
 }
 
 export interface IInitial
 {
-    frontendSteps: IFrontendStep[];
-    parameters: IParameter[];
-    choices: IChoice[];
-    expressions: IExpression[];
-    links: IChoiceLink[];
+    FrontendSteps: IFrontendStep[];
+    Parameters: IParameter[];
+    Choices: IChoice[];
+    Expressions: IExpression[];
+    Links: IChoiceLink[];
 }

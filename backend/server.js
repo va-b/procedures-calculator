@@ -2,7 +2,7 @@
 
 const Hapi = require('@hapi/hapi');
 const Path = require('path');
-const dbConnectionString  = "postgres://postgres:NeveroyatniyKonOlegaGazmanova@37.235.251.79:8002/procedures_calculator";
+const dbConnectionString  = "postgres://postgres:NeveroyatniyKonOlegaGazmanova@localhost:5432/procedures_calculator";
 const { Pool } = require('pg');
 
 process.on('unhandledRejection', (err) => {
@@ -15,10 +15,14 @@ async function init()
     const db = new Pool({ connectionString: dbConnectionString });
     const server = Hapi.server({
         port: 5000,
-        host: 'localhost',
+        //host: '37.235.251.79',
         routes: {
             files: {
                 relativeTo: Path.join(__dirname, '../dist')
+            },
+            cors: {
+                origin: ['*'],
+                additionalHeaders: ['cache-control', 'x-requested-with']
             }
         }
     });
@@ -67,9 +71,15 @@ async function init()
         handler: async (request, h) => {
             let exids = request.query.exids.split('_').map(x => parseInt(x));
             let qe = exids.join(", ");
-            let items = await db.query(`SELECT r FROM "Expression" e, "ResultItemView" r WHERE e."Id" in (${qe}) AND r."ProcedureId" = e."ProcedureId"`);
-            //let res = await db.query('SELECT * FROM "Organisation" WHERE "Id" = $1 LIMIT 1', [id]);
-            return items.rows;
+            let items = await db.query(`SELECT r.* FROM "Expression" e, "ResultItemView" r WHERE e."Id" in (${qe}) AND r."ProcedureId" = e."ProcedureId"`);
+            let stages = await db.query('SELECT s."Id" as "StepId", s."Title" as "StepName", s."Order" as "StepNum" FROM "Stage" s');
+            let result = stages.rows;
+            result.forEach(s => {
+                let it = items.rows.filter(i => i.StageId === s.StepId);
+                s.Items = it;
+                s.TotalTime = it.reduce((a, b) => clsc(a.PerformingTime, 0) + clsc(b.PerformingTime, 0), 0)
+            });
+            return result;
         }
     });
 
@@ -80,3 +90,6 @@ async function init()
 
 
 init();
+
+
+const clsc = (v, val) =>  v === null || v === undefined ? val : v;

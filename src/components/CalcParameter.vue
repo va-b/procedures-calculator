@@ -3,10 +3,10 @@
         <v-card>
             <v-card-title style="flex-wrap: nowrap;">
                 <v-avatar :size="52" class="mr-3">
-                    <img :src="parameter.imageUrl"/>
+                    <img :src="parameter.ImageUrl"/>
                 </v-avatar>
-                <div>{{parameter.title}}</div>
-                <v-tooltip v-if="!!parameter.description"
+                <div>{{parameter.Title}}</div>
+                <v-tooltip v-if="!!parameter.Description"
                            :close-delay="500"
                            :max-width="500"
                            right
@@ -16,21 +16,21 @@
                             <v-icon small light>fa-question-circle</v-icon>
                         </v-btn>
                     </template>
-                    <span>{{parameter.description}}</span>
+                    <span>{{parameter.Description}}</span>
                 </v-tooltip>
             </v-card-title>
             <v-card-text class="pt-0">
                 <v-radio-group
-                        :value="$store.getters.SelectedChoiceIdForParameter(parameter.id)"
+                        :value="$store.getters.SelectedChoiceIdForParameter(parameter.Id)"
                         @change="v => $store.commit('CheckChoice', v)"
                         class="mt-0"
                 >
                     <v-radio
-                            v-for="choice in $store.getters.ChoicesForParameter(parameter.id)"
-                            :key="choice.id"
-                            :label="choice.title"
-                            :value="choice.id"
-                            :disabled="$store.getters.IsChoiceDisabled(choice.id)"
+                            v-for="choice in $store.getters.ChoicesForParameter(parameter.Id)"
+                            :key="choice.Id"
+                            :label="choice.Title"
+                            :value="choice.Id"
+                            :disabled="$store.getters.IsChoiceDisabled(choice.Id)"
                     ></v-radio>
                 </v-radio-group>
             </v-card-text>
