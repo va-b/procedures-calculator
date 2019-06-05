@@ -14,3 +14,8 @@ npm run serve
 ```
 npm run build
 ```
+
+### Start backend
+```
+npm run startServer
+```

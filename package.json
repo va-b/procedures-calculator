@@ -6,7 +6,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "getpg": "npm install"
+    "getpg": "npm install",
+    "startServer": "node ./backend/server.js"
   },
   "dependencies": {
     "vue": "^2.6.10",
@@ -14,7 +15,10 @@
     "vue-property-decorator": "^8.1.1",
     "vue-router": "^3.0.6",
     "vuetify": "^1.5.14",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "@hapi/hapi": "^18.3.1",
+    "@hapi/inert": "^5.2.0",
+    "pg": "^7.11.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
