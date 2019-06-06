@@ -10,6 +10,16 @@ npm run getpg
 npm run serve
 ```
 
+### Собрать фронтенд
+```
+npm run build
+```
+
+### Запустить сервер
+```
+npm run serve
+```
+
 ### Собрать приложение и развернуть сервер на локальной машине
 ```
 npm run localDeploy

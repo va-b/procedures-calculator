@@ -7,8 +7,8 @@
     "serve": "npm run startServer && vue-cli-service serve",
     "build": "vue-cli-service build",
     "getpg": "npm install",
-    "startServer": "node ./backend/server.js",
-    "localDeploy": "npm run getpg && npm run build && npm run startServer"
+    "startServer": "start node ./backend/server.js",
+    "localDeploy": "npm install && npm run build && npm run startServer"
   },
   "dependencies": {
     "vue": "^2.6.10",
