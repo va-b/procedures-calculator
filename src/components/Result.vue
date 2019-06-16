@@ -2,14 +2,14 @@
     <v-container grid-list-lg>
         <organisation-view v-model="currentOrganisationId"/>
         <v-progress-circular
-                v-if="!$store.state.Results.length"
+                v-if="!Results.length"
                 :size="60"
                 :width="3"
                 color="primary"
                 indeterminate
                 class="circulator"/>
         <v-stepper v-else v-model="e1" vertical>
-            <template v-for="sr in $store.state.Results">
+            <template v-for="sr in Results">
                 <v-stepper-step
                         :key="sr.StepId"
                         :step="sr.StepNum"
@@ -61,7 +61,7 @@
 <script lang="ts">
 
     import OrganisationView from "@/components/OrganisationView.vue";
-    import { IResultItem } from "@/model/CommonModels";
+    import {IResultItem, IResultStep} from "@/model/CommonModels";
     import { Component, Vue } from "vue-property-decorator";
     @Component({
         components: { OrganisationView },
@@ -70,13 +70,23 @@
     {
         e1: number = -1;
         currentOrganisationId: number = null;
+        Results: IResultStep[] = [];
+
+        async LoadResults(expressionIds: number[]): Promise<void>
+        {
+            try
+            {
+                this.Results = await window.$service.GetResults(expressionIds);
+            }
+            catch (e){console.error(e)}
+        }
 
         mounted()
         {
+            this.Results = [];
             let params = this.$route.params.exquery;
-            //todo: get запрос
             let expressionIds = params.split("_").map(x => parseInt(x));
-            this.$store.dispatch('LoadResults', expressionIds);
+            this.LoadResults(expressionIds);
         }
 
         selectOrganisation(id: number): void

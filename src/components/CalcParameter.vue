@@ -21,16 +21,16 @@
             </v-card-title>
             <v-card-text class="pt-0">
                 <v-radio-group
-                        :value="$store.getters.SelectedChoiceIdForParameter(parameter.Id)"
-                        @change="v => $store.commit('CheckChoice', v)"
+                        :value="SelectedChoiceIdForParameter"
+                        @change="CheckChoice"
                         class="mt-0"
                 >
                     <v-radio
-                            v-for="choice in $store.getters.ChoicesForParameter(parameter.Id)"
+                            v-for="choice in ChoicesForParameter"
                             :key="choice.Id"
                             :label="choice.Title"
                             :value="choice.Id"
-                            :disabled="$store.getters.IsChoiceDisabled(choice.Id)"
+                            :disabled="getIsChoiceDisabled(choice.Id)"
                     ></v-radio>
                 </v-radio-group>
             </v-card-text>
@@ -38,13 +38,38 @@
     </v-flex>
 </template>
 <script lang="ts">
-    import { IParameter } from "@/model/CommonModels";
+    import {IChoice, IChoiceLink, IParameter} from "@/model/CommonModels";
     import { Component, Prop, Vue } from "vue-property-decorator";
+    import {IsChoiceDisabled} from "@/model/ChoiceGraphHelper";
 
     @Component
     export default class CalcParameter extends Vue
     {
         @Prop() parameter: IParameter;
+        @Prop() allChoices: IChoice[];
+        @Prop() allLinks: IChoiceLink[];
+
+        get ChoicesForParameter(): IChoice[]
+        {
+            return this.allChoices.filter(x => x.ParameterId == this.parameter.Id)
+        }
+
+        get SelectedChoiceIdForParameter(): number
+        {
+            let res = this.ChoicesForParameter.find(x => x.Selected);
+            return !!res ? res.Id : null;
+        }
+
+        getIsChoiceDisabled(choiceId: number): boolean
+        {
+            return IsChoiceDisabled(choiceId, this.allLinks, this.allChoices)
+        }
+
+        CheckChoice(choiceId: number)
+        {
+            this.ChoicesForParameter.forEach(x => x.Selected = false);
+            this.ChoicesForParameter.find(x => x.Id == choiceId).Selected = true;
+        }
     }
 
 </script>

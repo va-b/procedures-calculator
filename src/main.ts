@@ -1,9 +1,7 @@
-//import '@babel/polyfill';
 import Vue from 'vue';
 import './plugins/vuetify';
 import App from './App.vue';
 import router from './router';
-import store from './store';
 import './assets/global-styles.css';
 import Fetcher from "@/services/Fetcher";
 import CalculatorService from "@/services/CalculatorService";
@@ -34,11 +32,10 @@ declare global {
 
 
 window.$http = new Fetcher();
-window.$service = new CalculatorService(url => 'http://localhost:5000/api/' + url);
-//window.$service = new CalculatorService(url => '/api/' + url);
+//window.$service = new CalculatorService(url => 'http://localhost:5000/api/' + url);
+window.$service = new CalculatorService(url => '/api/' + url);
 window.vm = new Vue({
   router,
-  store,
   render: h => h(App)
 });
 window.vm.$mount('#app');

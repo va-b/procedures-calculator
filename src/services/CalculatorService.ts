@@ -1,4 +1,8 @@
-import { IInitial, IOrganisation, IResultStep } from "@/model/CommonModels";
+import {
+    IInitial,
+    IOrganisation,
+    IResultStep
+} from "@/model/CommonModels";
 import ICalculatorService from "@/services/ICalculatorService";
 import { ApiHelper } from "@/services/IService";
 
@@ -6,9 +10,9 @@ export default class CalculatorService implements ICalculatorService
 {
     constructor(private readonly geturl: ApiHelper){}
 
-    GetSteps(): Promise<IInitial[]>
+    GetSteps(): Promise<IInitial>
     {
-        return window.$http.get<IInitial[]>(this.geturl('initial'));
+        return window.$http.get<IInitial>(this.geturl('initial'));
     }
 
     GetResults( expressionIds: number[] ): Promise<IResultStep[]>

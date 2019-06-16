@@ -1,7 +1,7 @@
 <template>
         <v-container grid-list-lg>
             <v-progress-circular
-                    v-if="!$store.state.FrontendSteps.length"
+                    v-if="!FrontendSteps.length"
                     :size="60"
                     :width="3"
                     color="primary"
@@ -9,9 +9,9 @@
                     class="circulator"/>
             <v-stepper class="c-stepper" alt-labels v-else :value="currentStepNumber">
                 <v-stepper-header>
-                    <template v-for="step in $store.state.FrontendSteps">
+                    <template v-for="step in FrontendSteps">
                         <v-stepper-step class="pa-3"
-                                        :style="{flexBasis: `${100/$store.state.FrontendSteps.length}%!important`}"
+                                        :style="{flexBasis: `${100/FrontendSteps.length}%!important`}"
                                         :complete="currentStepNumber >= step.Order"
                                         :step="step.Order"
                                         :key="step.Id"
@@ -23,7 +23,7 @@
                 </v-stepper-header>
 
                 <v-stepper-items>
-                    <v-stepper-content v-for="step in $store.state.FrontendSteps" :key="step.Id" :step="step.Order">
+                    <v-stepper-content v-for="step in FrontendSteps" :key="step.Id" :step="step.Order">
                         <v-card flat class="xs-12 md-8 lg-6 xl-4">
                             <v-card-title class="title">
                                 {{step.Title}}
@@ -32,7 +32,9 @@
                                 <v-layout column>
                                     <calc-parameter v-for="parameter in GetParams(step.Id)"
                                                     :key="parameter.Title"
-                                                    :parameter="parameter"/>
+                                                    :parameter="parameter"
+                                                    :allChoices="Choices"
+                                                    :allLinks="Links"/>
                                 </v-layout>
                             </v-card-text>
                         </v-card>
@@ -65,16 +67,33 @@
     import { GetExpressionsByChoiceIds } from "@/model/ChoiceGraphHelper";
     import { Component, Vue } from "vue-property-decorator";
     import CalcParameter from "./CalcParameter.vue";
-    import {IParameter} from "@/model/CommonModels";
+    import {IChoice, IChoiceLink, IExpression, IFrontendStep, IParameter} from "@/model/CommonModels";
 
     @Component({ components: { CalcParameter } })
     export default class Master extends Vue
     {
 
         currentStepNumber: number = 1;
+        FrontendSteps: IFrontendStep[] = [];
+        Parameters: IParameter[] = [];
+        Choices: IChoice[] = [];
+        Expressions: IExpression[] = [];
+        Links: IChoiceLink[] = [];
+
         created()
         {
-            this.$store.dispatch("LoadInitial");
+            this.LoadInitial();
+        }
+
+
+        async LoadInitial()
+        {
+            let initData = await window.$service.GetSteps();
+            this.FrontendSteps = initData.FrontendSteps;
+            this.Parameters = initData.Parameters;
+            this.Choices = initData.Choices;
+            this.Links = initData.Links;
+            this.Expressions = initData.Expressions;
         }
 
         get IsFirstStep(): boolean
@@ -84,31 +103,31 @@
         get IsLastStep(): boolean
         {
             return this.currentStepNumber ==
-                this.$store.state.FrontendSteps[this.$store.state.FrontendSteps.length - 1].Order
+                this.FrontendSteps[this.FrontendSteps.length - 1].Order
         }
 
         FrontendStepNext()
         {
-            let st = this.$store.state.FrontendSteps.find(x => x.Order == this.currentStepNumber + 1);
+            let st = this.FrontendSteps.find(x => x.Order == this.currentStepNumber + 1);
             if(!!st) this.currentStepNumber = st.Order;
         }
         FrontendStepPrev()
         {
-            let st = this.$store.state.FrontendSteps.find(x => x.Order == this.currentStepNumber - 1);
+            let st = this.FrontendSteps.find(x => x.Order == this.currentStepNumber - 1);
             if(!!st) this.currentStepNumber = st.Order;
         }
 
         GetParams(frontendStepId: number): IParameter[]
         {
-            return this.$store.state.Parameters.filter(x => x.FrontendStepId == frontendStepId)
+            return this.Parameters.filter(x => x.FrontendStepId == frontendStepId)
         }
 
         ComputeResults(): void
         {
             let exquery = GetExpressionsByChoiceIds(
-                this.$store.state.Expressions,
-                this.$store.state.Links,
-                this.$store.state.Choices
+                this.Expressions,
+                this.Links,
+                this.Choices
             ).map(x => x.Id.toString()).join("_");
             this.$router.push(`/result/${exquery}`)
         }
