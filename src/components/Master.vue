@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-    import { GetExpressionsByChoiceIds } from "@/model/ChoiceGraphHelper";
+    import { GetExpressions } from "@/model/ChoiceGraphHelper";
     import { Component, Vue } from "vue-property-decorator";
     import CalcParameter from "./CalcParameter.vue";
     import {IChoice, IChoiceLink, IExpression, IFrontendStep, IParameter} from "@/model/CommonModels";
@@ -124,7 +124,7 @@
 
         ComputeResults(): void
         {
-            let exquery = GetExpressionsByChoiceIds(
+            let exquery = GetExpressions(
                 this.Expressions,
                 this.Links,
                 this.Choices

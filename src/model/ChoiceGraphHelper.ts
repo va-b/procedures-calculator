@@ -1,13 +1,12 @@
 import {IChoice, IChoiceLink, IExpression} from "@/model/CommonModels";
 
-export function GetExpressionsByChoiceIds(
+export function GetExpressions(
     expressions: IExpression[],
     links: IChoiceLink[],
     choices: IChoice[]
 ): IExpression[]
 {
-    const downToTheGraph: (choiceId: number) => boolean
-        = choiceId =>
+    function downToTheGraph(choiceId: number): boolean
     {
         let h1 = links.filter(l => l.ChE == choiceId).map(l => l.ChS);
         if(h1.length == 0)
@@ -20,7 +19,7 @@ export function GetExpressionsByChoiceIds(
                 .filter(choiceId => choices.find(x => x.Id == choiceId).Selected)
                 .find(downToTheGraph);
         }
-    };
+    }
 
     return Array.from(new Set(expressions.filter(x => downToTheGraph(x.ChoiceId))));
 }
