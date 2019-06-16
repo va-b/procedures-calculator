@@ -8,15 +8,20 @@ export function GetExpressions(
 {
     function downToTheGraph(choiceId: number): boolean
     {
+        //Получить начала дуг графа, концом которых является данный Choice
         let h1 = links.filter(l => l.ChE == choiceId).map(l => l.ChS);
         if(h1.length == 0)
         {
+            //Если данный Choice не имеет связанных дуг, где он является конечной вершиной,
+            //то вернуть значение флага Selected для данного Choice
             return choices.find(x => x.Id == choiceId).Selected;
         }
         else
         {
             return !!h1
+                //Если флаг Selected Для Choice Начала дуги установлен в False, дуга не рассматривается
                 .filter(choiceId => choices.find(x => x.Id == choiceId).Selected)
+                //Иначе downToTheGraph выполняется для начальньных вершин дуг
                 .find(downToTheGraph);
         }
     }
