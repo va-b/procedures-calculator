@@ -1,6 +1,6 @@
 <template>
     <v-container grid-list-lg>
-        <organisation-view v-model="organisationDialog"/>
+        <organisation-view v-model="currentOrganisationId"/>
         <v-progress-circular
                 v-if="!$store.state.Results.length"
                 :size="60"
@@ -69,7 +69,7 @@
     export default class Result extends Vue
     {
         e1: number = -1;
-        organisationDialog: boolean = false;
+        currentOrganisationId: number = null;
 
         mounted()
         {
@@ -81,8 +81,7 @@
 
         selectOrganisation(id: number): void
         {
-            this.organisationDialog = true;
-            this.$store.dispatch('LoadOrganisation', id);
+            this.currentOrganisationId = id;
         }
 
         formatDays(item: IResultItem): string

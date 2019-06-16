@@ -72,7 +72,7 @@ async function init()
             let exids = request.query.exids.split('_').map(x => parseInt(x));
             let qe = exids.join(", ");
             let items = await db.query(`SELECT r.* FROM "Expression" e, "ResultItemView" r WHERE e."Id" in (${qe}) AND r."ProcedureId" = e."ProcedureId"`);
-            let stages = await db.query('SELECT s."Id" as "StepId", s."Title" as "StepName", s."Order" as "StepNum" FROM "Stage" s');
+            let stages = await db.query('SELECT s."Id" as "StepId", s."Title" as "StepName", s."Order" as "StepNum" FROM "Stage" s ORDER BY s."Order"');
             let result = stages.rows;
             result.forEach(s => {
                 let it = items.rows.filter(i => i.StageId === s.StepId);

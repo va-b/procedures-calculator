@@ -34,7 +34,8 @@ declare global {
 
 
 window.$http = new Fetcher();
-window.$service = new CalculatorService(url => '/api/' + url)
+window.$service = new CalculatorService(url => 'http://localhost:5000/api/' + url);
+//window.$service = new CalculatorService(url => '/api/' + url);
 window.vm = new Vue({
   router,
   store,
