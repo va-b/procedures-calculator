@@ -13,31 +13,30 @@ declare global {
   interface Window {
     $service: ICalculatorService;
     $http: IHttpClient;
-    vm: Vue;
+    $vm: Vue;
   }
 
   interface IHttpClient
   {
     get<T>( url: string ): Promise<T>;
 
-    post<T>( url: string, data: BodyInit ): Promise<T>;
+    post<T>( url: string, data: string | FormData ): Promise<T>;
 
-    put<T>( url: string, data: BodyInit ): Promise<T>;
+    put<T>( url: string, data: string ): Promise<T>;
 
-    patch<T>( url: string, data: BodyInit ): Promise<T>;
+    patch<T>( url: string, data: string ): Promise<T>;
 
     delete<T>( url: string ): Promise<T>;
   }
 }
 
 
-window.$http = new Fetcher();
-//window.$service = new CalculatorService(url => 'http://localhost:5000/api/' + url);
+window.$http = new Fetcher();//'http://localhost:5000');
 window.$service = new CalculatorService(url => '/api/' + url);
-window.vm = new Vue({
+window.$vm = new Vue({
   router,
   render: h => h(App)
 });
-window.vm.$mount('#app');
+window.$vm.$mount('#app');
 
 

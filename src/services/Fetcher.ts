@@ -2,7 +2,7 @@ export default class Fetcher implements IHttpClient
 {
     private readonly fetchParams: RequestInit;
 
-    constructor()
+    constructor(private readonly baseUrl: string = '')
     {
         let headers = new Headers();
         headers.set('Content-type', 'application/json');
@@ -10,42 +10,35 @@ export default class Fetcher implements IHttpClient
 
         this.fetchParams = {
             credentials: "same-origin",
-            headers: headers
+            headers: headers            
         };
     }
+    
+    private dataparser(val: any, key: string): any
+    {
+        let type = typeof (val);
+        let dateRegExp: RegExp = /\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d([+-][0-2]\d:[0-5]\d|Z|)/;
 
-    private handleResponse (response: Response): any
+
+        if (type === "string" && dateRegExp.test(val))
+        {
+            return new Date(val);
+        }
+        else return val;
+    }
+
+    private async handleResponse(response: Response): Promise<any>
     {
         if(!response.ok)
         {
-            let msg: string;
-            switch (response.status)
-            {
-                case 401:
-                    msg = "NOT_AUTHORIZED";
-                    break;
-                case 400:
-                    msg = "FRONTEND_ERROR";
-                    break;
-                case 404:
-                    msg = "NOT_FOUND_ERROR";
-                    break;
-                case 500:
-                    msg = "SERVER_ERROR";
-                    break;
-                case 502:
-                    msg = "CONNECTION_ERROR";
-                    break;
-                default:
-                    msg = JSON.stringify(response);
-            }
+            let msg: string = JSON.stringify(response);
             throw msg;
         }
         else
         {
             let contentType = response.headers.get("content-type");
             if(contentType && contentType.includes("application/json")) {
-                return response.json();
+                return JSON.parse(await response.text(), this.dataparser);
             }
             else{
                 return response.text();
@@ -55,41 +48,53 @@ export default class Fetcher implements IHttpClient
 
     public async delete<T>( url: string ): Promise<T>
     {
-        let params: RequestInit = { method: "DELETE" };
-        let resp = await fetch(url, {...this.fetchParams, ...params});
-        let res = this.handleResponse(resp);
+        let params: RequestInit = { method: "DELETE", ...this.fetchParams };
+        let resp = await fetch(this.baseUrl + url, params);
+        let res = await this.handleResponse(resp);
         return res as T;
     }
 
     public async get<T>( url: string ): Promise<T>
     {
-        let params: RequestInit = { method: "GET" };
-        let resp = await fetch(url, {...this.fetchParams, ...params});
-        let res = this.handleResponse(resp);
+        let params: RequestInit = { method: "GET", ...this.fetchParams };
+        let resp = await fetch(this.baseUrl + url, params);
+        let res = await this.handleResponse(resp);
         return res as T;
     }
 
-    public async patch<T>( url: string, data: BodyInit ): Promise<T>
+    public async patch<T>( url: string, data: string ): Promise<T>
     {
-        let params: RequestInit = { method: "PATCH", body: data };
-        let resp = await fetch(url, {...this.fetchParams, ...params});
-        let res = this.handleResponse(resp);
+        let params: RequestInit = { method: "PATCH", body: data, ...this.fetchParams };
+        let resp = await fetch(this.baseUrl + url, params);
+        let res = await this.handleResponse(resp);
         return res as T;
     }
 
-    public async post<T>( url: string, data: BodyInit ): Promise<T>
-    {
-        let params: RequestInit = { method: "POST", body: data };
-        let resp = await fetch(url, {...this.fetchParams, ...params});
-        let res = this.handleResponse(resp);
+    public async post<T>( url: string, data: string | FormData ): Promise<T>
+    { 
+        let fp;
+
+        if(data instanceof FormData)
+        {
+            let h = new Headers();
+            h.set('Content-type', 'multipart/form-data');
+            fp = {credentials: "same-origin", headers: h};
+        }
+        else
+        {
+            fp = this.fetchParams;
+        }
+        let params: RequestInit = { method: "POST", body: data, ...fp };
+        let resp = await fetch(this.baseUrl + url, params);
+        let res = await this.handleResponse(resp);
         return res as T;
     }
 
-    public async put<T>( url: string, data: BodyInit ): Promise<T>
+    public async put<T>( url: string, data: string ): Promise<T>
     {
         let params: RequestInit = { method: "PUT", body: data };
-        let resp = await fetch(url, {...this.fetchParams, ...params});
-        let res = this.handleResponse(resp);
+        let resp = await fetch(this.baseUrl + url, {...this.fetchParams, ...params});
+        let res = await this.handleResponse(resp);
         return res as T;
     }
 }
