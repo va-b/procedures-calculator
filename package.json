@@ -1,23 +1,23 @@
 {
   "name": "procedures-calculator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "author": "Julia Milekhina",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "getpg": "npm install",
-    "startServer": "start node ./backend/server.js",
+    "startServer": "node ./backend/server.js",
     "localDeploy": "npm install && npm run build && npm run startServer"
   },
   "dependencies": {
     "vue": "^2.6.10",
     "vue-class-component": "^7.1.0",
-    "vue-property-decorator": "^8.1.1",
+    "vue-property-decorator": "^8.2.1",
     "vue-router": "^3.0.6",
-    "vuetify": "^1.5.14",
+    "vuetify": "^1.5.16",
     "@hapi/hapi": "^18.3.1",
-    "@hapi/inert": "^5.2.0",
+    "@hapi/inert": "^5.2.1",
     "pg": "^7.11.0"
   },
   "devDependencies": {

@@ -27,7 +27,7 @@
                         </tr>
                         <tr>
                             <td class="pa-1">Адрес:</td>
-                            <td class="pa-1">{{currentOrg.address}}</td>
+                            <td class="pa-1">{{currentOrg.Address}}</td>
                         </tr>
                     </table>
                 </v-card-text>
