@@ -1,6 +1,6 @@
 <template>
-    <v-dialog @input="dialogStateChange" :value="!!value" scrollable width="480">
-        <v-card tile style="min-height:400px">
+    <v-dialog @input="dialogStateChange" :value="!!value" scrollable width="800">
+        <v-card tile>
             <v-progress-circular :size="32" indeterminate :width="2" color="primary" v-if="currentOrg == null"
                                  style="position:absolute; top: calc(50% - 16px); left: calc(50% - 16px)"></v-progress-circular>
             <template v-else>
@@ -11,8 +11,8 @@
                         <v-icon>fa-times</v-icon>
                     </v-btn>
                 </v-card-title>
-                <v-card-text style="min-height:320px">
-                    <table class="font-weight-medium">
+                <v-card-text class="subheading" style="min-height:260px">
+                    <table >
                         <tr>
                             <td class="pa-1">Телефон:</td>
                             <td class="pa-1">{{currentOrg.Phone}}</td>
@@ -22,15 +22,22 @@
                             <td class="pa-1">{{currentOrg.Fax}}</td>
                         </tr>
                         <tr>
-                            <td class="pa-1">Электронная почта:</td>
+                            <td class="pa-1">Email:</td>
                             <td class="pa-1">{{currentOrg.Email}}</td>
                         </tr>
                         <tr>
                             <td class="pa-1">Адрес:</td>
                             <td class="pa-1">{{currentOrg.Address}}</td>
                         </tr>
+                        <tr>
+                            <td class="py-2 px-1 font-italic body-1">{{currentOrg.Description}}</td>
+                        </tr>
                     </table>
                 </v-card-text>
+                <iframe v-if="!!currentOrg.YandexMapsLink"
+                        :src="currentOrg.YandexMapsLink"
+                        height="400"
+                ></iframe>
             </template>
         </v-card>
     </v-dialog>

@@ -41,10 +41,10 @@ export interface IOrganisation extends IContentEntity
     Fax: string;
     Email: string;
     Address: string;
-    Latitude: number;
-    Longitude: number;
+    YandexMapsLink: string;
     IsByGovernment: boolean;
     SubregionId: number;
+    Description: string;
 }
 
 export interface IParameter extends IContentEntity
