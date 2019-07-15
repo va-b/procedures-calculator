@@ -35,7 +35,7 @@
                     </table>
                 </v-card-text>
                 <iframe v-if="!!currentOrg.YandexMapsLink"
-                        :src="currentOrg.YandexMapsLink"
+                        :src="'https://yandex.ru/map-widget/v1/-/'+currentOrg.YandexMapsLink"
                         height="400"
                 ></iframe>
             </template>
