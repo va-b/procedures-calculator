@@ -8,7 +8,7 @@
     "build": "vue-cli-service build",
     "getpg": "npm install",
     "startServer": "node ./backend/server.js",
-    "localDeploy": "npm install && npm run build && npm run startServer"
+    "localDeploy": "npm run getpg && npm run build && npm run startServer"
   },
   "dependencies": {
     "@hapi/hapi": "^18.3.2",
