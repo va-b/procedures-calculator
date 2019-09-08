@@ -18,6 +18,7 @@ const vuetifyConfig: VuetifyUseOptions = {
         success: '#4CAF50',
         warning: '#FFC107'
     },
+    iconfont: "fa"
 };
 
 Vue.use(Vuetify, vuetifyConfig);
