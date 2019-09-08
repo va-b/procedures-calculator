@@ -14,7 +14,7 @@ async function init()
 {
     const db = new Pool({ connectionString: dbConnectionString });
     const server = Hapi.server({
-        port: 5000,
+        port: 80,
         //host: '37.235.251.79',
         routes: {
             files: {
