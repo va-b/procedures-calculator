@@ -39,37 +39,47 @@
 </template>
 <script lang="ts">
     import {IChoice, IChoiceLink, IParameter} from "@/model/CommonModels";
-    import { Component, Prop, Vue } from "vue-property-decorator";
+    import Vue from "vue";
     import {IsChoiceDisabled} from "@/model/ChoiceGraphHelper";
 
-    @Component
-    export default class CalcParameter extends Vue
-    {
-        @Prop() parameter: IParameter;
-        @Prop() allChoices: IChoice[];
-        @Prop() allLinks: IChoiceLink[];
-
-        get ChoicesForParameter(): IChoice[]
-        {
-            return this.allChoices.filter(x => x.ParameterId == this.parameter.Id)
+    export default Vue.extend<{}, {
+        getIsChoiceDisabled: (choiceId: number) => boolean;
+        CheckChoice: (choiceId: number) => void;
+    }, {
+        ChoicesForParameter: IChoice[];
+        SelectedChoiceIdForParameter: number;
+    }, {
+        parameter: IParameter;
+        allChoices: IChoice[];
+        allLinks: IChoiceLink[];
+    }>({
+        name: 'CalcParameter',
+        props: {
+            parameter: { required: true },
+            allChoices: { required: true, type: Array },
+            allLinks: { required: true, type: Array }
+        },
+        computed: {
+            ChoicesForParameter(): IChoice[]
+            {
+                return this.allChoices.filter(x => x.ParameterId == this.parameter.Id)
+            },
+            SelectedChoiceIdForParameter(): number
+            {
+                let res = this.ChoicesForParameter.find(x => x.Selected);
+                return !!res ? res.Id : null;
+            }
+        },
+        methods: {
+            getIsChoiceDisabled(choiceId: number): boolean
+            {
+                return IsChoiceDisabled(choiceId, this.allLinks, this.allChoices)
+            },
+            CheckChoice(choiceId: number)
+            {
+                this.ChoicesForParameter.forEach(x => x.Selected = false);
+                this.ChoicesForParameter.find(x => x.Id == choiceId).Selected = true;
+            }
         }
-
-        get SelectedChoiceIdForParameter(): number
-        {
-            let res = this.ChoicesForParameter.find(x => x.Selected);
-            return !!res ? res.Id : null;
-        }
-
-        getIsChoiceDisabled(choiceId: number): boolean
-        {
-            return IsChoiceDisabled(choiceId, this.allLinks, this.allChoices)
-        }
-
-        CheckChoice(choiceId: number)
-        {
-            this.ChoicesForParameter.forEach(x => x.Selected = false);
-            this.ChoicesForParameter.find(x => x.Id == choiceId).Selected = true;
-        }
-    }
-
+    });
 </script>

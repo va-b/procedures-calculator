@@ -1,0 +1,344 @@
+[
+  {
+    "Id": 2,
+    "Title": "Среднеэтажный жилой дом",
+    "ParameterId": 1,
+    "Selected": false
+  },
+  {
+    "Id": 3,
+    "Title": "Многоэтажный жилой дом",
+    "ParameterId": 1,
+    "Selected": false
+  },
+  {
+    "Id": 4,
+    "Title": "Линейные объекты",
+    "ParameterId": 1,
+    "Selected": false
+  },
+  {
+    "Id": 5,
+    "Title": "Производственного или коммерческого назначения",
+    "ParameterId": 1,
+    "Selected": false
+  },
+  {
+    "Id": 7,
+    "Title": "Для производственной деятельности",
+    "ParameterId": 2,
+    "Selected": false
+  },
+  {
+    "Id": 8,
+    "Title": "Не для проживания граждан и производственной деятельности",
+    "ParameterId": 2,
+    "Selected": false
+  },
+  {
+    "Id": 14,
+    "Title": "Район",
+    "ParameterId": 5,
+    "Selected": false
+  },
+  {
+    "Id": 16,
+    "Title": "Право собственности",
+    "ParameterId": 6,
+    "Selected": false
+  },
+  {
+    "Id": 21,
+    "Title": "Нет",
+    "ParameterId": 8,
+    "Selected": false
+  },
+  {
+    "Id": 31,
+    "Title": "Нет",
+    "ParameterId": 13,
+    "Selected": false
+  },
+  {
+    "Id": 33,
+    "Title": "Нет",
+    "ParameterId": 14,
+    "Selected": false
+  },
+  {
+    "Id": 35,
+    "Title": "Нет",
+    "ParameterId": 15,
+    "Selected": false
+  },
+  {
+    "Id": 37,
+    "Title": "Нет",
+    "ParameterId": 16,
+    "Selected": false
+  },
+  {
+    "Id": 39,
+    "Title": "Нет",
+    "ParameterId": 17,
+    "Selected": false
+  },
+  {
+    "Id": 41,
+    "Title": "Нет",
+    "ParameterId": 18,
+    "Selected": false
+  },
+  {
+    "Id": 43,
+    "Title": "Нет",
+    "ParameterId": 19,
+    "Selected": false
+  },
+  {
+    "Id": 45,
+    "Title": "Негосударственная экспертиза",
+    "ParameterId": 20,
+    "Selected": false
+  },
+  {
+    "Id": 46,
+    "Title": "Не предполагается",
+    "ParameterId": 20,
+    "Selected": false
+  },
+  {
+    "Id": 48,
+    "Title": "Не предполагается",
+    "ParameterId": 21,
+    "Selected": false
+  },
+  {
+    "Id": 50,
+    "Title": "Нет",
+    "ParameterId": 22,
+    "Selected": false
+  },
+  {
+    "Id": 51,
+    "Title": "Предполагается",
+    "ParameterId": 23,
+    "Selected": false
+  },
+  {
+    "Id": 29,
+    "Title": "Собственные средства",
+    "ParameterId": 12,
+    "Selected": false
+  },
+  {
+    "Id": 1,
+    "Title": "Малоэтажный жилой дом: жилой дом с количеством этажей не более чем три, состоящие из нескольких блоков, количество которых не превышает десять и каждый из которых предназначен для проживания одной семьи",
+    "ParameterId": 1,
+    "Selected": true
+  },
+  {
+    "Id": 55,
+    "Title": "Соглашение об установлении сервитута, решение об установлении публичного сервитута",
+    "ParameterId": 6,
+    "Selected": false
+  },
+  {
+    "Id": 28,
+    "Title": "Средства бюджета (городского, муниципального, областного, федерального)",
+    "ParameterId": 12,
+    "Selected": true
+  },
+  {
+    "Id": 44,
+    "Title": "Государственная экспертиза",
+    "ParameterId": 20,
+    "Selected": true
+  },
+  {
+    "Id": 30,
+    "Title": "Да",
+    "ParameterId": 13,
+    "Selected": true
+  },
+  {
+    "Id": 36,
+    "Title": "Да",
+    "ParameterId": 16,
+    "Selected": true
+  },
+  {
+    "Id": 32,
+    "Title": "Да",
+    "ParameterId": 14,
+    "Selected": true
+  },
+  {
+    "Id": 34,
+    "Title": "Да",
+    "ParameterId": 15,
+    "Selected": true
+  },
+  {
+    "Id": 38,
+    "Title": "Да",
+    "ParameterId": 17,
+    "Selected": true
+  },
+  {
+    "Id": 40,
+    "Title": "Да",
+    "ParameterId": 18,
+    "Selected": true
+  },
+  {
+    "Id": 42,
+    "Title": "Да",
+    "ParameterId": 19,
+    "Selected": true
+  },
+  {
+    "Id": 6,
+    "Title": "Для проживания граждан",
+    "ParameterId": 2,
+    "Selected": true
+  },
+  {
+    "Id": 9,
+    "Title": "Не более 1500м2",
+    "ParameterId": 3,
+    "Selected": true
+  },
+  {
+    "Id": 20,
+    "Title": "Да",
+    "ParameterId": 8,
+    "Selected": true
+  },
+  {
+    "Id": 52,
+    "Title": "Не предполагается",
+    "ParameterId": 23,
+    "Selected": true
+  },
+  {
+    "Id": 49,
+    "Title": "Да",
+    "ParameterId": 22,
+    "Selected": true
+  },
+  {
+    "Id": 15,
+    "Title": "Город",
+    "ParameterId": 5,
+    "Selected": true
+  },
+  {
+    "Id": 17,
+    "Title": "Право аренды",
+    "ParameterId": 6,
+    "Selected": true
+  },
+  {
+    "Id": 47,
+    "Title": "Предполагается",
+    "ParameterId": 21,
+    "Selected": true
+  },
+  {
+    "Id": 57,
+    "Title": "Объект требует установления санитарно-защитных зон",
+    "ParameterId": 10,
+    "Selected": false
+  },
+  {
+    "Id": 26,
+    "Title": "Объект в границе зоны",
+    "ParameterId": 11,
+    "Selected": false
+  },
+  {
+    "Id": 23,
+    "Title": "Объект не в границе зоны",
+    "ParameterId": 9,
+    "Selected": true
+  },
+  {
+    "Id": 25,
+    "Title": "Объект не в границе зоны",
+    "ParameterId": 10,
+    "Selected": true
+  },
+  {
+    "Id": 22,
+    "Title": "Объект в границе зоны",
+    "ParameterId": 9,
+    "Selected": false
+  },
+  {
+    "Id": 27,
+    "Title": "Объект не в границе зоны",
+    "ParameterId": 11,
+    "Selected": true
+  },
+  {
+    "Id": 24,
+    "Title": "Объект в границе зоны",
+    "ParameterId": 10,
+    "Selected": false
+  },
+  {
+    "Id": 53,
+    "Title": "Более 1500м2",
+    "ParameterId": 3,
+    "Selected": false
+  },
+  {
+    "Id": 54,
+    "Title": "ИЖС",
+    "ParameterId": 1,
+    "Selected": false
+  },
+  {
+    "Id": 18,
+    "Title": "Предполагается",
+    "ParameterId": 7,
+    "Selected": false
+  },
+  {
+    "Id": 19,
+    "Title": "Не предполагается",
+    "ParameterId": 7,
+    "Selected": true
+  },
+  {
+    "Id": 12,
+    "Title": "до 4-х этажей",
+    "ParameterId": 4,
+    "Selected": false
+  },
+  {
+    "Id": 13,
+    "Title": "не выше 8 этажей",
+    "ParameterId": 4,
+    "Selected": false
+  },
+  {
+    "Id": 58,
+    "Title": "9 и выше",
+    "ParameterId": 4,
+    "Selected": false
+  },
+  {
+    "Id": 10,
+    "Title": "не более 2-х этажей",
+    "ParameterId": 4,
+    "Selected": false
+  },
+  {
+    "Id": 11,
+    "Title": "не более 3-х этажей",
+    "ParameterId": 4,
+    "Selected": true
+  }
+]

@@ -1,0 +1,263 @@
+[
+  {
+    "Id": 1,
+    "OrganisationId": 2,
+    "DocumentId": 1,
+    "StageId": 1,
+    "PerformingTime": 20,
+    "IsTimeByCalendar": false,
+    "Title": "Выдача градостроительного плана земельного участка"
+  },
+  {
+    "Id": 10,
+    "OrganisationId": 1,
+    "DocumentId": 10,
+    "StageId": 2,
+    "PerformingTime": 60,
+    "IsTimeByCalendar": false,
+    "Title": "Предоставление разрешения на отклонение от предельных параметров разрешенного строительства, реконструкции объектов капитального строительства"
+  },
+  {
+    "Id": 11,
+    "OrganisationId": 1,
+    "DocumentId": 11,
+    "StageId": 3,
+    "PerformingTime": null,
+    "IsTimeByCalendar": true,
+    "Title": "Направление уведомление о планируемых строительстве или реконструкции объекта индивидуального жилищного строительства"
+  },
+  {
+    "Id": 14,
+    "OrganisationId": 2,
+    "DocumentId": 14,
+    "StageId": 3,
+    "PerformingTime": 10,
+    "IsTimeByCalendar": false,
+    "Title": "Выдача порубочного билета"
+  },
+  {
+    "Id": 13,
+    "OrganisationId": 2,
+    "DocumentId": 13,
+    "StageId": 3,
+    "PerformingTime": 7,
+    "IsTimeByCalendar": false,
+    "Title": "Предоставление разрешения на осуществление земляных работ"
+  },
+  {
+    "Id": 12,
+    "OrganisationId": 2,
+    "DocumentId": 12,
+    "StageId": 3,
+    "PerformingTime": 18,
+    "IsTimeByCalendar": false,
+    "Title": "Присвоение адреса объекту адресации или аннулирование адреса"
+  },
+  {
+    "Id": 7,
+    "OrganisationId": 3,
+    "DocumentId": 7,
+    "StageId": 1,
+    "PerformingTime": 14,
+    "IsTimeByCalendar": true,
+    "Title": "Заключение договора о подключении (технологическом присоединении) к системе теплоснабжения"
+  },
+  {
+    "Id": 4,
+    "OrganisationId": 3,
+    "DocumentId": 3,
+    "StageId": 1,
+    "PerformingTime": 14,
+    "IsTimeByCalendar": true,
+    "Title": "Заключение договора о подключении (технологического присоединения) к централизованным бытовым или общесплавным системам водоотведения"
+  },
+  {
+    "Id": 5,
+    "OrganisationId": 3,
+    "DocumentId": 4,
+    "StageId": 1,
+    "PerformingTime": 14,
+    "IsTimeByCalendar": true,
+    "Title": "Заключение договора о подключении (технологическом присоединении) к сетям газораспределения"
+  },
+  {
+    "Id": 2,
+    "OrganisationId": 3,
+    "DocumentId": 2,
+    "StageId": 1,
+    "PerformingTime": 14,
+    "IsTimeByCalendar": true,
+    "Title": "Заключение договора о подключении (технологического присоединения) к централизованной системе холодного водоснабжения"
+  },
+  {
+    "Id": 3,
+    "OrganisationId": 3,
+    "DocumentId": 5,
+    "StageId": 1,
+    "PerformingTime": 30,
+    "IsTimeByCalendar": true,
+    "Title": "Заключение договора о технологическом присоединении к электрическим сетям"
+  },
+  {
+    "Id": 6,
+    "OrganisationId": 3,
+    "DocumentId": 6,
+    "StageId": 1,
+    "PerformingTime": 30,
+    "IsTimeByCalendar": true,
+    "Title": "Заключение договора о подключении (технологическом присоединении) к централизованным ливневой системам водоотведения"
+  },
+  {
+    "Id": 8,
+    "OrganisationId": 3,
+    "DocumentId": 8,
+    "StageId": 1,
+    "PerformingTime": 30,
+    "IsTimeByCalendar": true,
+    "Title": "Заключение договора о подключении (присоединении) к централизованным системам горячего водоснабжения"
+  },
+  {
+    "Id": 17,
+    "OrganisationId": 1,
+    "DocumentId": 17,
+    "StageId": 3,
+    "PerformingTime": 7,
+    "IsTimeByCalendar": false,
+    "Title": "Выдача разрешения на строительство"
+  },
+  {
+    "Id": 19,
+    "OrganisationId": 1,
+    "DocumentId": 18,
+    "StageId": 5,
+    "PerformingTime": 7,
+    "IsTimeByCalendar": false,
+    "Title": "Выдача разрешения на ввод объекта в эксплуатацию"
+  },
+  {
+    "Id": 18,
+    "OrganisationId": 10,
+    "DocumentId": 20,
+    "StageId": 5,
+    "PerformingTime": null,
+    "IsTimeByCalendar": true,
+    "Title": "Получение технических планов на здание или наружные коммуникации"
+  },
+  {
+    "Id": 20,
+    "OrganisationId": 9,
+    "DocumentId": 19,
+    "StageId": 5,
+    "PerformingTime": 5,
+    "IsTimeByCalendar": false,
+    "Title": "Постановка на кадастровый учет"
+  },
+  {
+    "Id": 21,
+    "OrganisationId": 9,
+    "DocumentId": 19,
+    "StageId": 5,
+    "PerformingTime": 7,
+    "IsTimeByCalendar": false,
+    "Title": "Государственная регистрация права собственности на объект недвижимого имущества"
+  },
+  {
+    "Id": 16,
+    "OrganisationId": 8,
+    "DocumentId": 16,
+    "StageId": 3,
+    "PerformingTime": null,
+    "IsTimeByCalendar": true,
+    "Title": "Проведение негосударственной экспертизы проектной документации и результатов инженерных изысканий"
+  },
+  {
+    "Id": 23,
+    "OrganisationId": 12,
+    "DocumentId": 17,
+    "StageId": 3,
+    "PerformingTime": 10,
+    "IsTimeByCalendar": false,
+    "Title": "Выдача разрешения на строительство, если при проведении работ по сохранению объекта культурного наследия затрагиваются конструктивные и другие характеристики надежности и безопасности такого объекта"
+  },
+  {
+    "Id": 25,
+    "OrganisationId": 11,
+    "DocumentId": 22,
+    "StageId": 3,
+    "PerformingTime": 90,
+    "IsTimeByCalendar": false,
+    "Title": "Проведение государственной экологической экспертизы объектов регионального уровня"
+  },
+  {
+    "Id": 22,
+    "OrganisationId": 9,
+    "DocumentId": 19,
+    "StageId": 5,
+    "PerformingTime": 10,
+    "IsTimeByCalendar": false,
+    "Title": "Государственный кадастровый учет и государственная регистрация прав"
+  },
+  {
+    "Id": 26,
+    "OrganisationId": 2,
+    "DocumentId": 21,
+    "StageId": 2,
+    "PerformingTime": 13,
+    "IsTimeByCalendar": false,
+    "Title": "Предоставление решения о согласовании архитектурно-градостроительного облика объекта"
+  },
+  {
+    "Id": 24,
+    "OrganisationId": 11,
+    "DocumentId": 17,
+    "StageId": 3,
+    "PerformingTime": 10,
+    "IsTimeByCalendar": false,
+    "Title": "Подготовка и выдача разрешения на строительство, реконструкцию объекта капитального строительства, реконструкцию которого планируется осуществлять в границах особо охраняемых природных территорий регионального значения"
+  },
+  {
+    "Id": 9,
+    "OrganisationId": 6,
+    "DocumentId": 9,
+    "StageId": 1,
+    "PerformingTime": null,
+    "IsTimeByCalendar": true,
+    "Title": "Разработка проектной документации"
+  },
+  {
+    "Id": 28,
+    "OrganisationId": 10,
+    "DocumentId": 24,
+    "StageId": 3,
+    "PerformingTime": null,
+    "IsTimeByCalendar": true,
+    "Title": "Решение об установлении зоны с особыми условиями использования территории"
+  },
+  {
+    "Id": 29,
+    "OrganisationId": 1,
+    "DocumentId": 25,
+    "StageId": 1,
+    "PerformingTime": 85,
+    "IsTimeByCalendar": true,
+    "Title": "Принятие решения о подготовке документации по планировке территории и утверждение документации по планировке территории"
+  },
+  {
+    "Id": 27,
+    "OrganisationId": 9,
+    "DocumentId": 23,
+    "StageId": 1,
+    "PerformingTime": 7,
+    "IsTimeByCalendar": true,
+    "Title": "Регистрация права на землю"
+  },
+  {
+    "Id": 15,
+    "OrganisationId": 7,
+    "DocumentId": 15,
+    "StageId": 3,
+    "PerformingTime": 63,
+    "IsTimeByCalendar": true,
+    "Title": "Проведение государственной экспертизы результатов инженерных изысканий и проектной документации"
+  }
+]

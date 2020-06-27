@@ -14,13 +14,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Запустить сервер
-```
-npm run serve
-```
-
-### Собрать приложение и развернуть сервер на локальной машине
-```
-npm run localDeploy
-```

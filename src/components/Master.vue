@@ -64,74 +64,87 @@
 </template>
 
 <script lang="ts">
+    import CalcParameter from "@/components/CalcParameter.vue";
     import { GetExpressions } from "@/model/ChoiceGraphHelper";
-    import { Component, Vue } from "vue-property-decorator";
-    import CalcParameter from "./CalcParameter.vue";
+    import Vue from "vue";
     import {IChoice, IChoiceLink, IExpression, IFrontendStep, IParameter} from "@/model/CommonModels";
 
-    @Component({ components: { CalcParameter } })
-    export default class Master extends Vue
-    {
-
-        currentStepNumber: number = 1;
-        FrontendSteps: IFrontendStep[] = [];
-        Parameters: IParameter[] = [];
-        Choices: IChoice[] = [];
-        Expressions: IExpression[] = [];
-        Links: IChoiceLink[] = [];
-
+    export default Vue.extend<{
+        currentStepNumber: number;
+        FrontendSteps: IFrontendStep[];
+        Parameters: IParameter[];
+        Choices: IChoice[];
+        Expressions: IExpression[];
+        Links: IChoiceLink[];
+    },{
+        LoadInitial: () => Promise<void>;
+        FrontendStepNext: () => void;
+        FrontendStepPrev: () => void;
+        GetParams: (frontendStepId: number) => IParameter[];
+        ComputeResults: () => void;
+    },{
+        IsFirstStep: boolean;
+        IsLastStep: boolean;
+    },{}>({
+        name: 'Master',
+        components: { CalcParameter },
+        data: () => ({
+            currentStepNumber: 1,
+            FrontendSteps: [],
+            Parameters: [],
+            Choices: [],
+            Expressions: [],
+            Links: []
+        }),
+        computed: {
+            IsFirstStep(): boolean
+            {
+                return this.currentStepNumber == 1;
+            },
+            IsLastStep(): boolean
+            {
+                return this.currentStepNumber == this.FrontendSteps[this.FrontendSteps.length - 1].Order
+            }
+        },
+        methods: {
+            async LoadInitial()
+            {
+                let initData = await window.$service.GetSteps();
+                this.FrontendSteps = initData.FrontendSteps;
+                this.Parameters = initData.Parameters;
+                this.Choices = initData.Choices;
+                this.Links = initData.Links;
+                this.Expressions = initData.Expressions;
+            },
+            FrontendStepNext()
+            {
+                let st = this.FrontendSteps.find(x => x.Order == this.currentStepNumber + 1);
+                if(!!st) this.currentStepNumber = st.Order;
+            },
+            FrontendStepPrev()
+            {
+                let st = this.FrontendSteps.find(x => x.Order == this.currentStepNumber - 1);
+                if(!!st) this.currentStepNumber = st.Order;
+            },
+            GetParams(frontendStepId: number): IParameter[]
+            {
+                return this.Parameters.filter(x => x.FrontendStepId == frontendStepId)
+            },
+            ComputeResults(): void
+            {
+                let exquery = GetExpressions(
+                    this.Expressions,
+                    this.Links,
+                    this.Choices
+                ).map(x => x.Id.toString()).join("_");
+                this.$router.push(`/result/${exquery}`)
+            }
+        },
         created()
         {
             this.LoadInitial();
-        }
-
-
-        async LoadInitial()
-        {
-            let initData = await window.$service.GetSteps();
-            this.FrontendSteps = initData.FrontendSteps;
-            this.Parameters = initData.Parameters;
-            this.Choices = initData.Choices;
-            this.Links = initData.Links;
-            this.Expressions = initData.Expressions;
-        }
-
-        get IsFirstStep(): boolean
-        {
-            return this.currentStepNumber == 1;
-        }
-        get IsLastStep(): boolean
-        {
-            return this.currentStepNumber ==
-                this.FrontendSteps[this.FrontendSteps.length - 1].Order
-        }
-
-        FrontendStepNext()
-        {
-            let st = this.FrontendSteps.find(x => x.Order == this.currentStepNumber + 1);
-            if(!!st) this.currentStepNumber = st.Order;
-        }
-        FrontendStepPrev()
-        {
-            let st = this.FrontendSteps.find(x => x.Order == this.currentStepNumber - 1);
-            if(!!st) this.currentStepNumber = st.Order;
-        }
-
-        GetParams(frontendStepId: number): IParameter[]
-        {
-            return this.Parameters.filter(x => x.FrontendStepId == frontendStepId)
-        }
-
-        ComputeResults(): void
-        {
-            let exquery = GetExpressions(
-                this.Expressions,
-                this.Links,
-                this.Choices
-            ).map(x => x.Id.toString()).join("_");
-            this.$router.push(`/result/${exquery}`)
-        }
-    }
+        },
+    });
 </script>
 <style>
     .c-stepper .v-stepper__label {

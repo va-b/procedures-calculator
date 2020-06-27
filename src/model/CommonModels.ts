@@ -29,7 +29,10 @@ export interface IExpression extends IEntity
     ChoiceId: number;
     ProcedureId: number;
 }
-
+export interface IStage extends IContentEntity
+{
+    Order: number;
+}
 export interface IFrontendStep extends IContentEntity
 {
     Order: number;

@@ -62,76 +62,85 @@
 
     import OrganisationView from "@/components/OrganisationView.vue";
     import {IResultItem, IResultStep} from "@/model/CommonModels";
-    import { Component, Vue } from "vue-property-decorator";
-    @Component({
+    import Vue from "vue";
+
+    export default Vue.extend<{
+        e1: number;
+        currentOrganisationId: number;
+        Results: IResultStep[];
+    }, {
+        LoadResults: (expressionIds: number[]) => Promise<void>;
+        selectOrganisation: (id: number) => void;
+        formatDays: (item: IResultItem) => string;
+    }, {
+        headers: { text: string; sortable: false; value: keyof IResultItem; class: string; }[]
+    }, {}>({
+        name: 'Result',
         components: { OrganisationView },
-    })
-    export default class Result extends Vue
-    {
-        e1: number = -1;
-        currentOrganisationId: number = null;
-        Results: IResultStep[] = [];
-
-        async LoadResults(expressionIds: number[]): Promise<void>
-        {
-            try
-            {
-                this.Results = await window.$service.GetResults(expressionIds);
-            }
-            catch (e){console.error(e)}
-        }
-
+        data: () => ({
+            e1: -1,
+            currentOrganisationId: null,
+            Results: []
+        }),
         mounted()
         {
             this.Results = [];
             let params = this.$route.params.exquery;
             let expressionIds = params.split("_").map(x => parseInt(x));
             this.LoadResults(expressionIds);
-        }
-
-        selectOrganisation(id: number): void
-        {
-            this.currentOrganisationId = id;
-        }
-
-        formatDays(item: IResultItem): string
-        {
-            return !!item.PerformingTime
-                   ? `до ${item.PerformingTime} ${item.IsTimeByCalendar ? 'календарных' : 'рабочих'} дней`
-                   : "Договорная";
-        }
-
-        get headers(): { text: string; sortable: false; value: keyof IResultItem; class: string; }[]
-        {
-            return [
+        },
+        methods: {
+            async LoadResults(expressionIds: number[]): Promise<void>
+            {
+                try
                 {
-                    text: 'Процедура',
-                    sortable: false,
-                    value: "ProcedureName",
-                    class: 'body-2'
-                },
-                {
-                    text: 'Ответственная организация',
-                    sortable: false,
-                    value: "OrganisationName",
-                    class: 'body-2'
-                },
-                {
-                    text: 'Срок проведения',
-                    sortable: false,
-                    value: "PerformingTime",
-                    class: 'body-2'
-                },
-                {
-                    text: 'Результат',
-                    sortable: false,
-                    value: "DocumentName",
-                    class: 'body-2'
-                },
-            ];
+                    this.Results = await window.$service.GetResults(expressionIds);
+                }
+                catch (e){console.error(e)}
+            },
+            selectOrganisation(id: number): void
+            {
+                this.currentOrganisationId = id;
+            },
+            formatDays(item: IResultItem): string
+            {
+                return !!item.PerformingTime
+                    ? `до ${item.PerformingTime} ${item.IsTimeByCalendar ? 'календарных' : 'рабочих'} дней`
+                    : "Договорная";
+            }
+        },
+        computed: {
+            headers()
+            {
+                return [
+                    {
+                        text: 'Процедура',
+                        sortable: false,
+                        value: "ProcedureName",
+                        class: 'body-2'
+                    },
+                    {
+                        text: 'Ответственная организация',
+                        sortable: false,
+                        value: "OrganisationName",
+                        class: 'body-2'
+                    },
+                    {
+                        text: 'Срок проведения',
+                        sortable: false,
+                        value: "PerformingTime",
+                        class: 'body-2'
+                    },
+                    {
+                        text: 'Результат',
+                        sortable: false,
+                        value: "DocumentName",
+                        class: 'body-2'
+                    },
+                ];
+            }
         }
-    };
-
+    });
 </script>
 <style>
     .intable-button{

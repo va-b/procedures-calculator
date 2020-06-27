@@ -38,14 +38,17 @@
 </template>
 <script lang="ts">
 import HelpView from "@/components/HelpView.vue";
-import {Vue, Component} from "vue-property-decorator";
+import Vue from "vue";
 
-@Component({
-  components: { HelpView },
-})
-export default class App extends Vue
-{
-  helpDialog: boolean = false;
+export default Vue.extend<{
+	helpDialog: boolean
+}, {}, {}, {}>({
+	  components: { HelpView },
+    name: 'App',
+    data: () => ({
+	    helpDialog: false
+    })
 
-}
+});
+
 </script>

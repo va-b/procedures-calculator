@@ -44,25 +44,27 @@
         </v-container>
 </template>
 <script lang="ts">
-    import { Component, Vue } from "vue-property-decorator";
+    import Vue from "vue";
 
-    @Component
-    export default class StartPage extends Vue
-    {
-        private get etap(): { text: string; icon: string; }[]
-        {
-            return [
-                {
-                    icon: 'fa-file-invoice', text: 'прохождение процедур',
-                },
-                {
-                    icon: 'fa-clock', text: 'расчёт времени',
-                },
-                {
-                    icon: 'fa-hotel', text: 'реализация строительного проекта',
-                },
-            ];
+    export default Vue.extend<{},{},{
+        etap: { text: string; icon: string; }[]
+    },{}>({
+        name: 'StartPage',
+        computed: {
+            etap()
+            {
+                return [
+                    {
+                        icon: 'fa-file-invoice', text: 'прохождение процедур',
+                    },
+                    {
+                        icon: 'fa-clock', text: 'расчёт времени',
+                    },
+                    {
+                        icon: 'fa-hotel', text: 'реализация строительного проекта',
+                    },
+                ];
+            }
         }
-
-    }
+    });
 </script>

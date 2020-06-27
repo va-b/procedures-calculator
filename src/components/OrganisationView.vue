@@ -2,12 +2,12 @@
     <v-dialog @input="dialogStateChange" :value="!!value" scrollable width="800">
         <v-card tile>
             <v-progress-circular :size="32" indeterminate :width="2" color="primary" v-if="currentOrg == null"
-                                 style="position:absolute; top: calc(50% - 16px); left: calc(50% - 16px)"></v-progress-circular>
+                                 style="position:absolute; top: calc(50% - 16px); left: calc(50% - 16px)"/>
             <template v-else>
                 <v-card-title class="subheading pa-3 grey lighten-3" primary-title  style="flex-wrap:nowrap!important;">
                     <div>{{currentOrg.Title}}</div>
                     <v-spacer/>
-                    <v-btn @click="$listeners.input(false)" flat small icon class="ma-0" color="grey darken-1">
+                    <v-btn @click="$emit('input', null)" flat small icon class="ma-0" color="grey darken-1">
                         <v-icon>fa-times</v-icon>
                     </v-btn>
                 </v-card-title>
@@ -43,33 +43,35 @@
     </v-dialog>
 </template>
 <script lang="ts">
-    import {Vue, Component, Prop, Watch} from "vue-property-decorator";
+    import Vue from "vue";
     import {IOrganisation} from "@/model/CommonModels";
 
-    @Component
-    export default class OrganisationView extends Vue
-    {
-        @Prop() value: any;
-
-        @Watch('value') onOrgIdChanged()
-        {
-            this.loadOrg();
+    export default Vue.extend<{
+        currentOrg: IOrganisation|null;
+    },{
+        dialogStateChange: (v: boolean) => void
+    },{},{
+        value: number|null;
+    }>({
+        props: {
+            value: {required: true},
+        },
+        data: () => ({
+            currentOrg: null
+        }),
+        watch: {
+            async value(v)
+            {
+                if(!v) return;
+                this.currentOrg = null;
+                this.currentOrg = await window.$service.GetOrganisation(v);
+            }
+        },
+        methods: {
+            dialogStateChange(v: boolean)
+            {
+                this.$emit('input', v ? this.value : null);
+            }
         }
-
-        dialogStateChange(v: boolean)
-        {
-            this.$emit('input', v ? this.value : null);
-        }
-
-        currentOrg: IOrganisation = null;
-
-        async loadOrg()
-        {
-            this.currentOrg = null;
-            let id = parseInt(this.value);
-            if(isNaN(id)) return;
-            this.currentOrg = await window.$service.GetOrganisation(id);
-        }
-
-    }
+    });
 </script>

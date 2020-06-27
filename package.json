@@ -6,28 +6,30 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "getpg": "npm install",
-    "startServer": "node ./backend/server.js"
+    "getpg": "npm install"
   },
   "dependencies": {
-    "@hapi/hapi": "^18.3.2",
-    "@hapi/inert": "^5.2.1",
-    "pg": "^7.12.1",
-    "vue": "^2.6.10",
-    "vue-class-component": "^7.1.0",
-    "vue-property-decorator": "^8.2.2",
-    "vue-router": "^3.1.3",
-    "vuetify": "^1.5.18"
+    "vue": "^2.6.11",
+    "vue-router": "^3.3.4",
+    "vuetify": "^1.5.24"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.11.0",
-    "@vue/cli-plugin-typescript": "^3.11.0",
-    "@vue/cli-service": "^3.11.0",
+    "@vue/cli-plugin-babel": "^4.4.6",
+    "@vue/cli-plugin-typescript": "^4.4.6",
+    "@vue/cli-service": "^4.4.6",
     "stylus": "^0.54.7",
     "stylus-loader": "^3.0.2",
-    "typescript": "^3.6.2",
-    "vue-cli-plugin-vuetify": "^0.5.0",
-    "vue-template-compiler": "^2.6.10",
-    "vuetify-loader": "^1.3.0"
-  }
+    "typescript": "^3.9.5",
+    "vue-cli-plugin-vuetify": "^0.6.3",
+    "vue-template-compiler": "^2.6.11",
+    "vuetify-loader": "^1.5.0"
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "last 2 years and > .2%"
+  ]
 }

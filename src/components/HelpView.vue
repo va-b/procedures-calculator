@@ -18,12 +18,15 @@
     </v-dialog>
 </template>
 <script lang="ts">
-    import { Vue, Component, Prop } from "vue-property-decorator";
+    import Vue from "vue";
 
-    @Component
-    export default class HelpView extends Vue
-    {
-        @Prop() value!: boolean;
-    }
+    export default Vue.extend<{}, {}, {}, {
+        value: boolean
+    }>({
+        name: 'HelpView',
+        props: {
+            value: {required: true, type: Boolean}
+        }
+    })
 </script>
 <style></style>
