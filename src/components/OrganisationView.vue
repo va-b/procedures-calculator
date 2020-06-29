@@ -44,7 +44,7 @@
 </template>
 <script lang="ts">
     import Vue from "vue";
-    import {IOrganisation} from "@/model/CommonModels";
+    import type {IOrganisation} from "@/model/CommonModels";
 
     export default Vue.extend<{
         currentOrg: IOrganisation|null;

@@ -67,7 +67,7 @@
     import CalcParameter from "@/components/CalcParameter.vue";
     import { GetExpressions } from "@/model/ChoiceGraphHelper";
     import Vue from "vue";
-    import {IChoice, IChoiceLink, IExpression, IFrontendStep, IParameter} from "@/model/CommonModels";
+    import type {IChoice, IChoiceLink, IExpression, IFrontendStep, IParameter} from "@/model/CommonModels";
 
     export default Vue.extend<{
         currentStepNumber: number;

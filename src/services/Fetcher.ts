@@ -29,20 +29,21 @@ export default class Fetcher implements IHttpClient
 
     private async handleResponse(response: Response): Promise<any>
     {
-        if(!response.ok)
+        if ( response.ok )
         {
-            let msg: string = JSON.stringify(response);
-            throw msg;
+            let contentType = response.headers.get("content-type");
+            if ( contentType && contentType.includes("application/json") )
+            {
+                return JSON.parse(await response.text(), this.dataparser);
+            }
+            else
+            {
+                return response.text();
+            }
         }
         else
         {
-            let contentType = response.headers.get("content-type");
-            if(contentType && contentType.includes("application/json")) {
-                return JSON.parse(await response.text(), this.dataparser);
-            }
-            else{
-                return response.text();
-            }
+            throw new Error(JSON.stringify(response));
         }
     }
 

@@ -1,51 +1,47 @@
-import {
-    IChoice, IChoiceLink, IDocument, IExpression,
+import type {
+    IChoice, IChoiceLink,
+    IDocument, IExpression,
     IFrontendStep,
     IInitial,
-    IOrganisation, IParameter, IProcedure, IResultItem,
-    IResultStep, IStage,
+    IOrganisation, IParameter,
+    IProcedure, IResultItem,
+    IResultStep,
 } from "@/model/CommonModels";
-import ICalculatorService from "@/services/ICalculatorService";
-import { ApiHelper } from "@/services/IService";
-
-type imported<T> = { default: T }
+import type { ICalculatorService } from "@/services/ICalculatorService";
 
 export default class CalculatorService implements ICalculatorService
 {
-    constructor(private readonly geturl: ApiHelper){}
+    constructor(){}
 
     async GetSteps(): Promise<IInitial>
     {
         let res = await Promise.all([
-            import('@/db/json/FrontendStep.json'),
-            import('@/db/json/Parameter.json'),
-            import('@/db/json/Choice.json'),
-            import('@/db/json/Expression.json'),
-            import('@/db/json/Link.json'),
+            window.$db.GetEntity("FrontendStep"),
+            window.$db.GetEntity("Parameter"),
+            window.$db.GetEntity("Choice"),
+            window.$db.GetEntity("Expression"),
+            window.$db.GetEntity("Link"),
         ]);
         return {
-            FrontendSteps:  res[0].default.sort((a, b) => a.Order - b.Order) as IFrontendStep[],
-            Parameters:     res[1].default.sort((a, b) => a.FrontendStepId - b.FrontendStepId) as IParameter[],
-            Choices:        res[2].default.sort((a, b) => a.ParameterId - b.ParameterId) as IChoice[],
-            Expressions:    res[3].default as IExpression[],
-            Links:          res[4].default as IChoiceLink[]
+            FrontendSteps:  res[0].sort((a, b) => a.Order - b.Order) as IFrontendStep[],
+            Parameters:     res[1].sort((a, b) => a.FrontendStepId - b.FrontendStepId) as IParameter[],
+            Choices:        res[2].sort((a, b) => a.ParameterId - b.ParameterId) as IChoice[],
+            Expressions:    res[3] as IExpression[],
+            Links:          res[4] as IChoiceLink[]
         };
     }
 
     async GetResults( expressionIds: number[] ): Promise<IResultStep[]>
     {
-        let procIds: number[] = (await import('@/db/json/Expression.json'))
-            .default
+        let procIds: number[] = (await window.$db.GetEntity("Expression"))
             .filter(x => expressionIds.includes(x.Id))
             .map(x => x.ProcedureId);
 
-        let procedures: IProcedure[] = (await import('@/db/json/Procedure.json'))
-            .default
+        let procedures: IProcedure[] = (await window.$db.GetEntity("Procedure"))
             .filter(x => procIds.includes(x.Id));
 
-        let orgs: IOrganisation[] = (await import('@/db/json/Organisation.json')).default;
-        let docs: IDocument[] = (await import('@/db/json/Document.json')).default;
-
+        let orgs: IOrganisation[] = await window.$db.GetEntity("Organisation");
+        let docs: IDocument[] = await window.$db.GetEntity("Document");
         let items: IResultItem[] = procedures.map(p => {
             let doc = docs.find(d => d.Id == p.DocumentId);
             let org = orgs.find(o => o.Id == p.OrganisationId);
@@ -61,8 +57,7 @@ export default class CalculatorService implements ICalculatorService
                 DocumentName: doc.Title
             };
         });
-        let result: IResultStep[] = (await import('@/db/json/Stage.json') as imported<IStage[]>)
-            .default
+        let result: IResultStep[] = (await window.$db.GetEntity("Stage"))
             .sort((a, b) => a.Order - b.Order)
             .map(s => {
                 let it = items.filter(i => i.StageId === s.Id);
@@ -80,7 +75,7 @@ export default class CalculatorService implements ICalculatorService
 
     async GetOrganisation( id: number ): Promise<IOrganisation>
     {
-        let orgs = (await import('@/db/json/Organisation.json')).default as IOrganisation[];
+        let orgs = (await window.$db.GetEntity("Organisation")) as IOrganisation[];
         return orgs.find(x => x.Id == id);
     }
 

@@ -1,44 +1,47 @@
-interface IEntity
+import { EntityKey } from "@/services/IDbService";
+
+interface IEntity<E extends EntityKey>
 {
-    Id: number;
+    Id: number & {__type: EntityKey};
+    __type?: E;
 }
 
-interface IContentEntity extends IEntity
+interface IContentEntity<E extends EntityKey> extends IEntity<E>
 {
     Title: string;
 }
 
-export interface IChoiceLink extends IEntity
+export interface IChoiceLink extends IEntity<"Link">
 {
     ChS: number;
     ChE: number;
 }
 
-export interface IChoice extends IContentEntity
+export interface IChoice extends IContentEntity<"Choice">
 {
     ParameterId: number;
     Selected: boolean;
     disabled?: boolean;
 }
 
-export interface IDocument extends IContentEntity
+export interface IDocument extends IContentEntity<"Document">
 {}
 
-export interface IExpression extends IEntity
+export interface IExpression extends IEntity<"Expression">
 {
     ChoiceId: number;
     ProcedureId: number;
 }
-export interface IStage extends IContentEntity
+export interface IStage extends IContentEntity<"Stage">
 {
     Order: number;
 }
-export interface IFrontendStep extends IContentEntity
+export interface IFrontendStep extends IContentEntity<"FrontendStep">
 {
     Order: number;
 }
 
-export interface IOrganisation extends IContentEntity
+export interface IOrganisation extends IContentEntity<"Organisation">
 {
     Phone: string;
     Fax: string;
@@ -50,14 +53,14 @@ export interface IOrganisation extends IContentEntity
     Description: string;
 }
 
-export interface IParameter extends IContentEntity
+export interface IParameter extends IContentEntity<"Parameter">
 {
     Description: string;
     ImageUrl: string;
     FrontendStepId: number;
 }
 
-export interface IProcedure extends IContentEntity
+export interface IProcedure extends IContentEntity<"Procedure">
 {
     PerformingTime: number;
     IsTimeByCalendar: boolean;
@@ -66,12 +69,7 @@ export interface IProcedure extends IContentEntity
     StageId: number;
 }
 
-export interface StageDbModel extends IContentEntity
-{
-    Order: number;
-}
-
-export interface SubregionDbModel extends IContentEntity
+export interface ISubregion extends IContentEntity<"Subregion">
 {}
 
 export interface IResultItem

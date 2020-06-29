@@ -61,7 +61,7 @@
 <script lang="ts">
 
     import OrganisationView from "@/components/OrganisationView.vue";
-    import {IResultItem, IResultStep} from "@/model/CommonModels";
+    import type {IResultItem, IResultStep} from "@/model/CommonModels";
     import Vue from "vue";
 
     export default Vue.extend<{

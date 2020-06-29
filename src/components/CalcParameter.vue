@@ -38,7 +38,7 @@
     </v-flex>
 </template>
 <script lang="ts">
-    import {IChoice, IChoiceLink, IParameter} from "@/model/CommonModels";
+    import type {IChoice, IChoiceLink, IParameter} from "@/model/CommonModels";
     import Vue from "vue";
     import {IsChoiceDisabled} from "@/model/ChoiceGraphHelper";
 

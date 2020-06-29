@@ -1,4 +1,4 @@
-import {IChoice, IChoiceLink, IExpression} from "@/model/CommonModels";
+import type {IChoice, IChoiceLink, IExpression} from "@/model/CommonModels";
 
 export function GetExpressions(
     expressions: IExpression[],
